@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-backend
-          image: rupesh1997/chat-service-backend:1.0.0
+          image: rupesh1997/chat-service-backend:1.0.1
           ports:
             - containerPort: 8181
           env:

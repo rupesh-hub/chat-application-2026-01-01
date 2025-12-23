@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: chats
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -16,7 +16,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   backend-svc:
     container_name: backend-svc
     image: rupesh1997/chat-service-backend:1.0.1
@@ -31,7 +30,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     healthcheck:
-      test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -39,7 +38,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   chat-service-frontend:
     container_name: chat-service-frontend
     image: rupesh1997/chat-service-frontend:1.0.0
@@ -51,7 +49,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
 networks:
   chat-apps:
     driver: 'bridge'
