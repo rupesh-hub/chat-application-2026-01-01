@@ -1,4 +1,6 @@
+
 export const API = {
+  WEBSOCKET_URL: "http://localhost:8181/ws",
   AUTH: {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',

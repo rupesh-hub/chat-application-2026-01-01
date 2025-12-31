@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Component} from "@angular/core"
+import {RouterOutlet} from "@angular/router"
 
 @Component({
-  selector: 'chat-root',
+  selector: "chat-root",
   imports: [RouterOutlet],
   standalone: true,
   template: `
-    <router-outlet/>`
+    <router-outlet/>`,
 })
 export class AppComponent {
 }

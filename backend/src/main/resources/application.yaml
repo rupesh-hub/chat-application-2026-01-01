@@ -1,10 +1,6 @@
 spring:
   application:
     name: chat-service-backend
-  config:
-    import:
-      - "application-docker.yaml"
-      - "application-production.yaml"
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:default}
 
@@ -13,53 +9,64 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  #  thymeleaf:
+  #    cache: false
+  #    prefix: classpath:/templates/
+  #    suffix: .html
+
+  mvc:
+    static-path-pattern: /uploads/**
+    servlet:
+      multipart:
+        enabled: true
+        file-size-threshold: 10MB
+        max-file-size: 10MB
+        max-request-size: 10MB
+  web:
+    resources:
+      static-locations: "file:./backend/uploads/"
+
 
 server:
   port: 8181
+  servlet:
+    session:
+      timeout: 1h
 
 application:
+  security:
+    token:
+      secret_key: ${SECRET_KEY:TSHKAHSHSGSTBNSGJKSWUYGWBJBTUHHSGDSGVDVSGHXWYTFGYUHJHCVXSHCFYGSDBSBVCHGSFCYTWGJBCNBVS}
+      expiration: ${TOKEN_TIME_TO_LIVE_IN_SEC:1200}
   cors:
-    allowed-origins: ${ALLOW_CORS_ORIGIN:http://localhost:4200,http://192.168.1.70:4200}
+    allowed-origins: ${ALLOW_CORS_ORIGIN:http://localhost:3000,http://localhost:4200,http://192.168.1.70:3000}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  health:
-    readinessstate:
-      enabled: true
-    livenessstate:
-      enabled: true
-  endpoint:
-    health:
-      probes:
-        enabled: true
-      show-details: always
-    info:
-      access: read_only
-  info:
-    env:
-      enabled: true
+logging:
+  level:
+    root: INFO
+    com.alfarays: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
 
 info:
   app:
     name: Chat Application Backend
-    description: Handles one to one and group chats.
+    description: Professional one-to-one chat application
     version: 1.0.0
-    profile: default
-    owner: Rupesh Dulal
-    website: https://www.alfarays.tech
-  build:
-    timestamp: "@timestamp@"
   developer:
     name: "Rupesh Dulal"
     email: "rupeshdulal672@gmail.com"
-    github: "https://github.com/rupeshdulal"
+
+file:
+  upload:
+    directory: backend/uploads

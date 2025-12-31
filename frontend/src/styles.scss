@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -10,4 +10,16 @@
 
 body {
   font-family: serif;
+}
+
+input.ng-touched.ng-invalid {
+  @apply border border-red-600 bg-red-50 placeholder:text-red-400;
+}
+
+input.ng-pending {
+  @apply border border-orange-600 bg-orange-50 placeholder:text-orange-400 text-orange-600;
+}
+
+.error-message {
+  @apply font-semibold italic text-red-600;
 }
