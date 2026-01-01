@@ -47,6 +47,14 @@ export class WebSocketService implements OnDestroy {
     this.client.onConnect = () => {
       this.connectionStatusSubject.next("connected");
 
+      /*Participant status*/
+      this.client!.subscribe('/user/queue/status', message => {
+        const payload = JSON.parse(message.body);
+        this.statusSubject.next(payload);
+      });
+
+      this.client!.publish({destination: "/app/get-partner-status", body: null});
+
       // 1. Listen for messages from others
       this.client!.subscribe("/user/queue/private-messages", msg => {
         const message: MessageResponse = JSON.parse(msg.body);
@@ -56,7 +64,7 @@ export class WebSocketService implements OnDestroy {
         }
       });
 
-      // 2. Listen for server ACK when YOU send a message (FIX FOR SENDER UI)
+      // 2. Listen for server ACK when YOU send a message
       this.client!.subscribe("/user/queue/message-sent", msg => {
         const message: MessageResponse = JSON.parse(msg.body);
         this.sentAckSubject.next(message);
@@ -69,11 +77,6 @@ export class WebSocketService implements OnDestroy {
         this.updateBadgeMap(data.conversationId, count);
       });
 
-      /*ONLINE or OFFLINE STATUS*/
-      this.client!.subscribe('/user/queue/status', (message) => {
-        const payload = JSON.parse(message.body);
-        this.statusSubject.next(payload);
-      });
 
       this.client!.subscribe("/user/queue/messages-read", msg => {
         this.messageReadSubject.next(JSON.parse(msg.body));

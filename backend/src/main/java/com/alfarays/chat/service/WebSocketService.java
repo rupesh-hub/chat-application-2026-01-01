@@ -6,16 +6,18 @@ import com.alfarays.chat.model.*;
 import com.alfarays.chat.repository.ConversationRepository;
 import com.alfarays.chat.repository.MessageRepository;
 import com.alfarays.exceptions.AuthorizationException;
+import com.alfarays.user.entity.User;
 import com.alfarays.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.concurrent.*;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -26,92 +28,113 @@ public class WebSocketService {
     private final MessageRepository messageRepository;
     private final ConversationRepository conversationRepository;
     private final UserRepository userRepository;
-
-    // 🔑 session count per user
-    private final Map<String, Integer> userSessionCounts = new ConcurrentHashMap<>();
-
-    // 🔑 delayed OFFLINE tasks
-    private final Map<String, ScheduledFuture<?>> offlineTasks = new ConcurrentHashMap<>();
-
-    private final ScheduledExecutorService scheduler =
-            Executors.newSingleThreadScheduledExecutor();
-
-    /* =========================
-       SESSION MANAGEMENT (FIX)
-       ========================= */
-
-    public void incrementSession(String userId) {
-        userSessionCounts.merge(userId, 1, Integer::sum);
-
-        // ✅ cancel pending OFFLINE
-        ScheduledFuture<?> task = offlineTasks.remove(userId);
-        if (task != null) {
-            task.cancel(false);
-            log.info("Cancelled OFFLINE task for {}", userId);
-        }
-
-        log.info("Session++ {} -> {}", userId, userSessionCounts.get(userId));
-    }
-
-    public void decrementSession(String userId) {
-        userSessionCounts.compute(userId,
-                (k, v) -> (v == null || v <= 1) ? 0 : v - 1);
-
-        log.info("Session-- {} -> {}", userId,
-                userSessionCounts.getOrDefault(userId, 0));
-    }
-
-    /* =========================
-       PRESENCE (FIXED)
-       ========================= */
+    private final ConcurrentHashMap<String, Integer> sessionTracker = new ConcurrentHashMap<>();
 
     @Transactional
-    public void notifyUserStatus(String userId, String partnerId, boolean ignored) {
-        int sessions = userSessionCounts.getOrDefault(userId, 0);
+    public void handleUserPresence(String userId, boolean isConnecting) {
+        sessionTracker.compute(userId, (key, count) -> {
+            int newCount = (count == null) ? 0 : count;
+            if(isConnecting) newCount++;
+            else newCount = Math.max(0, newCount - 1);
 
-        if (sessions > 0) {
-            // ✅ ONLINE immediately
-            updateStatusInDbAndNotify(userId, partnerId, "ONLINE");
-            return;
-        }
-
-        // ⏳ schedule OFFLINE only ONCE
-        offlineTasks.computeIfAbsent(userId, u ->
-                scheduler.schedule(() -> {
-                    if (userSessionCounts.getOrDefault(userId, 0) == 0) {
-                        updateStatusInDbAndNotify(userId, partnerId, "OFFLINE");
-                    }
-                    offlineTasks.remove(userId);
-                }, 3, TimeUnit.SECONDS)
-        );
+            // Transition logic
+            if(isConnecting && newCount == 1) broadcastStatusChange(userId, "ONLINE");
+            else if(!isConnecting && newCount == 0) broadcastStatusChange(userId, "OFFLINE");
+            return newCount;
+        });
     }
 
-    private void updateStatusInDbAndNotify(
-            String userId, String partnerId, String status) {
-
+    private void broadcastStatusChange(String userId, String status) {
+        // Update DB so the "Last Seen" is preserved
         userRepository.findByEmail(userId).ifPresent(user -> {
             user.setStatus(status);
-            if ("OFFLINE".equals(status)) {
-                user.setLastSeen(LocalDateTime.now());
-            }
+            if(status.equals("OFFLINE")) user.setLastSeen(LocalDateTime.now());
             userRepository.save(user);
-            log.info("Persisted {} for {}", status, userId);
         });
 
-        messagingTemplate.convertAndSendToUser(
-                partnerId,
-                "/queue/status",
-                new StatusNotification(
-                        userId,
-                        status,
-                        LocalDateTime.now().toString()
-                )
-        );
+        // Notify all partners
+        List<Conversation> conversations = conversationRepository
+                .findActiveConversationsByUsername(userId, PageRequest.of(0, 1000));
+
+        for(Conversation conversation : conversations) {
+            String partnerEmail = userId.equals(conversation.getInitiator())
+                    ? conversation.getParticipant()
+                    : conversation.getInitiator();
+
+            messagingTemplate.convertAndSendToUser(
+                    partnerEmail,
+                    "/queue/status",
+                    new StatusNotification(userId, status, LocalDateTime.now().toString())
+            );
+        }
     }
 
-    /* =========================
-       ALL YOUR ORIGINAL METHODS
-       ========================= */
+    @Transactional(readOnly = true)
+    public void syncPartnerStatuses(String requesterEmail) {
+        List<Conversation> conversations = conversationRepository
+                .findActiveConversationsByUsername(requesterEmail, PageRequest.of(0, 1000));
+
+        for(Conversation conversation : conversations) {
+            String partnerEmail = requesterEmail.equals(conversation.getInitiator())
+                    ? conversation.getParticipant()
+                    : conversation.getInitiator();
+
+            // Check if partner is in our ACTIVE session map
+            boolean isPartnerOnline = sessionTracker.getOrDefault(partnerEmail, 0) > 0;
+            String status = isPartnerOnline ? "ONLINE" : "OFFLINE";
+
+            messagingTemplate.convertAndSendToUser(
+                    requesterEmail,
+                    "/queue/status",
+                    new StatusNotification(partnerEmail, status, LocalDateTime.now().toString())
+            );
+        }
+    }
+
+    @Transactional
+    public void partnerStatus(String requesterEmail) {
+        // 1. Update the requester to ONLINE in the database
+        User requester = userRepository.findByEmail(requesterEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        requester.setStatus("ONLINE");
+        userRepository.save(requester);
+
+        // 2. Fetch all conversations where the requester is a participant
+        // Use a high PageRequest or a List return type in your repo
+        List<Conversation> conversations = conversationRepository
+                .findActiveConversationsByUsername(requesterEmail, PageRequest.of(0, 1000));
+
+        for(Conversation conversation : conversations) {
+            // 3. Identify the OTHER person
+            String partnerEmail = requesterEmail.equals(conversation.getInitiator())
+                    ? conversation.getParticipant()
+                    : conversation.getInitiator();
+
+            userRepository.findByEmail(partnerEmail).ifPresent(partner -> {
+
+                // ACTION A: Tell the Partner that the Requester is now ONLINE
+                // This updates the partner's UI if they were already logged in
+                messagingTemplate.convertAndSendToUser(
+                        partnerEmail,
+                        "/queue/status",
+                        new StatusNotification(requesterEmail, "ONLINE", LocalDateTime.now().toString())
+                );
+
+                // ACTION B: Tell the Requester what this Partner's status is
+                // This is the CRITICAL fix for the refresh issue
+                messagingTemplate.convertAndSendToUser(
+                        requesterEmail,
+                        "/queue/status",
+                        new StatusNotification(
+                                partnerEmail,
+                                partner.getStatus(),
+                                partner.getLastSeen() != null ? partner.getLastSeen().toString() : ""
+                        )
+                );
+            });
+        }
+    }
 
     @Transactional
     public void sendPrivateMessage(String conversationId, String sender, String content) {

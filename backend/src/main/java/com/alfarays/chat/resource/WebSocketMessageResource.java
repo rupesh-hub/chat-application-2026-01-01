@@ -64,4 +64,10 @@ public class WebSocketMessageResource {
         webSocketService.markConversationAsRead(request.conversationId(), reader);
     }
 
+    @MessageMapping("/get-partner-status")
+    public void getPartnerStatus(Principal principal) {
+        String requester = principal.getName();
+        webSocketService.syncPartnerStatuses(requester);
+    }
+
 }

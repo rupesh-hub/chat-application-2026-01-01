@@ -95,7 +95,7 @@
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/java/com/alfarays/JenkinsDemoProject01Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/resources/application.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/test/java/com/alfarays/JenkinsDemoProject01ApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/uploads/2025-12-31/1_d49618fb_1FC53580-9716-4288-B037-7CBE14B3EDD7.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/StatusRequest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM-PRACTICE/TERRAFORM-DAY-01/terraform.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/main.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/provider.tf" afterDir="false" />
@@ -360,16 +360,12 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/WebSocketMessageResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/WebSocketMessageResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/AuthenticationEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/AuthenticationEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chats.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chats.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/conversation-users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/conversation-users.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/models/user.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/websocket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/websocket.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
@@ -545,7 +541,7 @@
     "Spring Boot.BackendApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION/docker/docker-compose/production",
+    "last_opened_file_path": "/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -585,6 +581,7 @@
       <workItem from="1766328954732" duration="6556000" />
       <workItem from="1766846461164" duration="746000" />
       <workItem from="1766847217283" duration="86996000" />
+      <workItem from="1767248693557" duration="8559000" />
     </task>
     <servers />
   </component>
@@ -592,30 +589,6 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.springframework.security.authentication.UsernamePasswordAuthenticationToken" memberName="principal" />

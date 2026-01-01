@@ -89,7 +89,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.selectedConversationId$
     ]).pipe(
       map(([conversations, id]) => {
-        console.log(conversations)
         return conversations.find(c => c.id === id) ?? null;
       })
     );

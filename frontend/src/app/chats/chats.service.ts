@@ -1,4 +1,4 @@
-import {BehaviorSubject, catchError, type Observable, of, throwError} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, Observable, of, throwError} from "rxjs";
 import {inject, Injectable} from "@angular/core";
 import type {ConversationResponse, MessageResponse} from "./chat.model";
 import {HttpClient} from '@angular/common/http';
@@ -9,8 +9,31 @@ import {StatusNotification} from '../shared/models/user.model';
 
 @Injectable({providedIn: "root"})
 export class ChatsService {
-  private conversationsSubject = new BehaviorSubject<ConversationResponse[]>([]);
-  public conversations$ = this.conversationsSubject.asObservable();
+  private rawConversationsSubject = new BehaviorSubject<ConversationResponse[]>([]);
+  private partnerStatusMap = new BehaviorSubject<Map<string, string>>(new Map());
+
+  // Use map logic with explicit type casting for the status union
+  public conversations$: Observable<ConversationResponse[]> = combineLatest([
+    this.rawConversationsSubject,
+    this.partnerStatusMap
+  ]).pipe(
+    map(([conversations, statusMap]) => {
+      return conversations.map(conv => {
+        const liveStatus = statusMap.get(conv.participant?.email);
+        if (liveStatus && conv.participant) {
+          return {
+            ...conv,
+            participant: {
+              ...conv.participant,
+              // Type cast 'string' to the specific union type allowed in UserResponse
+              status: liveStatus.toLowerCase() as "online" | "offline" | "typing"
+            }
+          };
+        }
+        return conv;
+      });
+    })
+  );
 
   private selectedConversationSubject = new BehaviorSubject<number | null>(null);
   public selectedConversation$ = this.selectedConversationSubject.asObservable();
@@ -27,7 +50,7 @@ export class ChatsService {
     this.http.get<GlobalResponse<ConversationResponse[]>>(`${this.API_PATH}`).pipe(
       map(response => response.data),
       tap(conversations => {
-        this.conversationsSubject.next(conversations);
+        this.rawConversationsSubject.next(conversations);
         this.webSocketService.setInitialUnreadCounts(conversations);
       }),
       catchError(error => {
@@ -37,13 +60,17 @@ export class ChatsService {
     ).subscribe();
   }
 
-  // 🔥 CRITICAL FIX: Pushes the message into local state so UI updates for sender/receiver
+  public updatePartnerStatus(notification: StatusNotification): void {
+    const currentMap = this.partnerStatusMap.value;
+    currentMap.set(notification.userId, notification.status);
+    this.partnerStatusMap.next(new Map(currentMap));
+  }
+
   public updateLocalConversationState(message: MessageResponse): void {
-    const conversations = this.conversationsSubject.getValue();
+    const conversations = this.rawConversationsSubject.getValue();
     const updated = conversations.map(conv => {
       if (conv.id === message.conversationId) {
         const messages = conv.messages || [];
-        // Prevent duplicate if socket sends same message twice
         const exists = messages.some(m => m.id === message.id);
         return {
           ...conv,
@@ -53,7 +80,18 @@ export class ChatsService {
       }
       return conv;
     });
-    this.conversationsSubject.next(updated);
+    this.rawConversationsSubject.next(updated);
+  }
+
+  public updateLastMessage(conversationId: number, lastMessage: any): void {
+    const conversations = this.rawConversationsSubject.getValue();
+    const updatedConversations = conversations.map(conv => {
+      if (conv.id === conversationId) {
+        return {...conv, lastMessage: lastMessage};
+      }
+      return conv;
+    });
+    this.rawConversationsSubject.next(updatedConversations);
   }
 
   public getConversations(): Observable<ConversationResponse[]> {
@@ -64,7 +102,7 @@ export class ChatsService {
     this.http.get<GlobalResponse<ConversationResponse[]>>(`${this.API_PATH}?query=${query}`).pipe(
       map(response => response.data),
       tap(conversations => {
-        this.conversationsSubject.next(conversations);
+        this.rawConversationsSubject.next(conversations);
         this.webSocketService.setInitialUnreadCounts(conversations);
       })
     ).subscribe();
@@ -88,44 +126,11 @@ export class ChatsService {
     this.webSocketService.resetUnreadCount(conversationId);
   }
 
-  public updateLastMessage(conversationId: number, lastMessage: any): void {
-    const conversations = this.conversationsSubject.getValue();
-    const updatedConversations = conversations.map(conv => {
-      if (conv.id === conversationId) {
-        return {...conv, lastMessage: lastMessage};
-      }
-      return conv;
-    });
-    this.conversationsSubject.next(updatedConversations);
-  }
-
-  getSelectedConversation(): Observable<number | null> {
+  public getSelectedConversation(): Observable<number | null> {
     return this.selectedConversation$;
   }
 
-  resetUnreadCount(id: number) {
+  public resetUnreadCount(id: number): void {
     this.webSocketService.resetUnreadCount(id);
   }
-
-  public updatePartnerStatus(notification: StatusNotification): void {
-    const currentConversations = this.conversationsSubject.value;
-    const updated: ConversationResponse[] = currentConversations.map((conv: ConversationResponse) => {
-      // 1. Check if this conversation has the participant mentioned in the notification
-      if (conv.participant && conv.participant.email === notification.userId) {
-        // 2. Return a deep copy with the updated status
-        return {
-          ...conv,
-          participant: {
-            ...conv.participant,
-            status: notification.status.toLowerCase() // Ensure it matches 'online' | 'offline'
-          }
-        } as ConversationResponse; // Explicitly cast to satisfy the compiler
-      }
-      // 3. Return original if no change
-      return conv;
-    });
-
-    this.conversationsSubject.next(updated);
-  }
-
 }

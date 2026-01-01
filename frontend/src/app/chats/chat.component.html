@@ -65,13 +65,9 @@
           class="h-20 border-b border-slate-200/60 bg-white backdrop-blur-md flex items-center px-8 shadow-sm flex-shrink-0 z-20">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
-              <div class="relative">
-                <img class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
-                     [src]="conversation.avatar" alt="Profile">
-                <span *ngIf="conversation.participant.status === 'online'"
-                      class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full status-indicator">
-                </span>
-              </div>
+              <img class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
+                   [src]="conversation.avatar" alt="Profile">
+
               <div>
                 <p class="font-bold text-[15px] text-slate-800 tracking-tight leading-none">{{ conversation.name }}</p>
                 <div class="flex items-center gap-1.5 mt-1">
