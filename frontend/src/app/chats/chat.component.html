@@ -29,6 +29,9 @@
       </div>
 
       <div class="px-4 pt-4 pb-3 flex-shrink-0">
+        <div *ngIf="_notificationService.message$ | async as message" class="mb-2">
+          <chat-notification [message]="message"/>
+        </div>
         <button
           class="w-full px-4 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 font-medium shadow-md active:scale-[0.98]"
           (click)="openNewConversation()">

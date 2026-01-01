@@ -50,7 +50,7 @@ public class ConversationService implements IConversationService {
         }
 
         if(initiator.equalsIgnoreCase(participant)) {
-            throw new IllegalArgumentException("Cannot create conversation with yourself !");
+            throw new AuthorizationException("Cannot create conversation with yourself !");
         }
 
         // 2️⃣ Generate unique key

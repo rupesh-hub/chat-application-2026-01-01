@@ -359,6 +359,11 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -573,7 +578,7 @@
       <workItem from="1766328954732" duration="6556000" />
       <workItem from="1766846461164" duration="746000" />
       <workItem from="1766847217283" duration="86996000" />
-      <workItem from="1767248693557" duration="8928000" />
+      <workItem from="1767248693557" duration="10520000" />
     </task>
     <servers />
   </component>

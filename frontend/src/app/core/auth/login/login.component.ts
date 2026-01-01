@@ -4,10 +4,13 @@ import {FormsModule, NgForm} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {NotificationService} from '../../../shared/services/notification.service';
+import {MessageType} from '../../../shared/component/notification.model';
+import {NotificationComponent} from '../../../shared/component/notification.component';
 
 @Component({
   selector: 'chat-login',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, NotificationComponent],
   standalone: true,
   templateUrl: './login.component.html',
 })
@@ -18,6 +21,7 @@ export class LoginComponent implements OnInit {
   isSuccess = false;
   private _authService: AuthService = inject(AuthService);
   private _router: Router = inject(Router);
+  protected _notificationService: NotificationService = inject(NotificationService);
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -42,7 +46,11 @@ export class LoginComponent implements OnInit {
     this._authService.login(this.authenticationForm.value).subscribe(
       {
         error: (error: HttpErrorResponse) => {
-          console.log(error)
+          this._notificationService.publish({
+            message: error.message || error.error?.message || 'Login failed. Please try again.',
+            timestamp: new Date().toString(),
+            type: MessageType.Error
+          });
         }
       }
     );

@@ -21,11 +21,15 @@ import {AuthService} from '../core/auth/auth.service';
 import {WebSocketService} from '../shared/services/websocket.service';
 import {map} from 'rxjs/operators';
 import {StatusNotification} from '../shared/models/user.model';
+import {NotificationService} from '../shared/services/notification.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MessageType} from '../shared/component/notification.model';
+import {NotificationComponent} from '../shared/component/notification.component';
 
 @Component({
   selector: "chat-chat",
   standalone: true,
-  imports: [CommonModule, FormsModule, ConversationUsersComponent],
+  imports: [CommonModule, FormsModule, ConversationUsersComponent, NotificationComponent],
   templateUrl: "./chat.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
@@ -78,6 +82,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   protected isSettingsOpen = false;
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
+  protected _notificationService: NotificationService = inject(NotificationService);
 
   ngOnInit(): void {
     this.conversations$ = this.chatsService.getConversations();
@@ -156,7 +161,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startConversation(participant: string): void {
-    this.chatsService.getOrCreateConversation(participant).subscribe();
+    this.chatsService.getOrCreateConversation(participant).subscribe(
+      {
+        error: (error: HttpErrorResponse) => {
+          this._notificationService.publish({
+            message: error.error?.message || 'Something went wrong. Please try again.',
+            timestamp: new Date().toString(),
+            type: MessageType.Error
+          });
+        }
+      }
+    );
     this.closeNewConversation();
   }
 
