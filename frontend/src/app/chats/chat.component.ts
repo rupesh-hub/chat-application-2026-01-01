@@ -13,12 +13,14 @@ import {FormsModule} from "@angular/forms";
 import {ChatsService} from "./chats.service";
 import {ConversationResponse, MessageResponse} from "./chat.model";
 import {ConversationUsersComponent} from "./conversation-users.component";
-import {debounceTime, distinctUntilChanged, type Observable, Subject, takeUntil} from "rxjs";
+import {combineLatest, debounceTime, distinctUntilChanged, type Observable, Subject, takeUntil} from "rxjs";
 import {UserResponse} from "../users/user.model";
 import {UsersService} from "../users/users.service";
 import {MessageService} from './message.service';
 import {AuthService} from '../core/auth/auth.service';
 import {WebSocketService} from '../shared/services/websocket.service';
+import {map} from 'rxjs/operators';
+import {StatusNotification} from '../shared/models/user.model';
 
 @Component({
   selector: "chat-chat",
@@ -26,6 +28,28 @@ import {WebSocketService} from '../shared/services/websocket.service';
   imports: [CommonModule, FormsModule, ConversationUsersComponent],
   templateUrl: "./chat.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      .whatsapp-bg {
+        background-color: #e5ddd5;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+        background-repeat: repeat;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .status-indicator {
+        transition: all 0.3s ease-in-out;
+      }
+    `
+  ]
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   protected websocketService = inject(WebSocketService);
@@ -43,18 +67,32 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   protected unreadCounts$ = this.websocketService.unreadCounts$;
   protected authenticatedUser$ = this.authService.authenticatedUser$;
 
+  // This stream makes the Header and Sidebar status LIVE
+  protected activeConversation$!: Observable<ConversationResponse | null>;
+
   protected selectedConversationId: number | null = null;
   protected newMessage = "";
   protected query = "";
   protected userQuery = "";
   protected isNewConversationOpen = false;
-  protected isSettingsOpen = false; // New Settings Flag
+  protected isSettingsOpen = false;
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.conversations$ = this.chatsService.getConversations();
     this.selectedConversationId$ = this.chatsService.getSelectedConversation();
+
+    // Combine list and selection into a single reactive stream
+    this.activeConversation$ = combineLatest([
+      this.conversations$,
+      this.selectedConversationId$
+    ]).pipe(
+      map(([conversations, id]) => {
+        console.log(conversations)
+        return conversations.find(c => c.id === id) ?? null;
+      })
+    );
 
     this.selectedConversationId$.pipe(takeUntil(this.destroy$)).subscribe((id) => {
       this.selectedConversationId = id;
@@ -66,12 +104,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       }
     });
 
-    // Handle real-time updates for Sender UI
+    // Subscriptions for real-time socket events
+    this.websocketService.userStatus$.pipe(takeUntil(this.destroy$)).subscribe((notification: StatusNotification) => {
+      this.chatsService.updatePartnerStatus(notification);
+    });
+
     this.websocketService.messageSentAck$.pipe(takeUntil(this.destroy$)).subscribe(msg => {
       this.chatsService.updateLocalConversationState(msg);
     });
 
-    // Handle incoming messages from others
     this.websocketService.privateMessages$.pipe(takeUntil(this.destroy$)).subscribe(msg => {
       this.chatsService.updateLocalConversationState(msg);
     });
@@ -98,14 +139,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatsService.selectConversation(conversation.id);
   }
 
-  getSelectedConversation(conversations: ConversationResponse[]): ConversationResponse | null {
-    return conversations.find((c) => c.id === this.selectedConversationId) ?? null;
-  }
-
-  getOtherParticipant(conversation: ConversationResponse): UserResponse | undefined {
-    return conversation.participant;
-  }
-
   searchUsers(): void {
     this.users$ = this.usersService.searchUsers(this.userQuery);
   }
@@ -114,18 +147,26 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.searchSubject.next(this.query);
   }
 
-  openNewConversation(): void { this.isNewConversationOpen = true; }
-  closeNewConversation(): void { this.isNewConversationOpen = false; this.userQuery = ""; }
+  openNewConversation(): void {
+    this.isNewConversationOpen = true;
+  }
+
+  closeNewConversation(): void {
+    this.isNewConversationOpen = false;
+    this.userQuery = "";
+  }
 
   startConversation(participant: string): void {
     this.chatsService.getOrCreateConversation(participant).subscribe();
     this.closeNewConversation();
   }
 
-  ngAfterViewChecked(): void { this.scrollToBottom(); }
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
 
   private scrollToBottom(): void {
-    if (this.scrollContainer) {
+    if (this.scrollContainer && this.scrollContainer.nativeElement) {
       this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
     }
   }
@@ -136,6 +177,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.messageService.setActiveConversation(null);
   }
 
-  trackByMessageId(_: number, message: MessageResponse) { return message.id; }
-  trackByUserId(_: number, user: UserResponse) { return user.id; }
+  trackByMessageId(_: number, message: MessageResponse) {
+    return message.id;
+  }
+
+  trackByUserId(_: number, user: UserResponse) {
+    return user.id;
+  }
 }

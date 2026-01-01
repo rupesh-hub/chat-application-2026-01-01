@@ -211,7 +211,7 @@ public class ConversationService implements IConversationService {
                         UserResponse.builder()
                                 .lastSeen(otherUser.getLastLogin() != null ? otherUser.getLastLogin().toString() : LocalDateTime.now().toString())
                                 .email(otherUser.getEmail())
-                                .status("online")
+                                .status("offline")
                                 .profile(avatarPath)
                                 .build()
                 )

@@ -95,87 +95,7 @@
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/java/com/alfarays/JenkinsDemoProject01Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/resources/application.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/test/java/com/alfarays/JenkinsDemoProject01ApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/model/AuthenticationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/model/AuthenticationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/model/RegistrationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/resource/AuthenticationResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/IAuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/entity/Conversation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/entity/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/ChatMessageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/ChatUserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/ConversationNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/ConversationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/MarkReadRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/MessageReceivedNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/MessageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/MessageResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/ReadReceipt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/StatusNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/TypingIndicatorRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/TypingNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/UnreadCountUpdate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/model/UserStatusNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/repository/ConversationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/repository/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/ConversationResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/MessageResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/WebSocketMessageResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/IConversationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/IMessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/configuration/WebSocketAuthInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/configuration/WebSocketConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/AccessDeniedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/AuthorizationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/InvalidCredentialsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/TokenExpiredException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/UserAccountException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/entity/Image.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/mapper/ImageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/model/ImageResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/repository/ImageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/service/ImageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/AuthenticationEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomAccessDeniedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomSecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/JwtTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/TokenValidationFilterBefore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/shared/AbstractEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/shared/AuditingConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/PaginatedResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/PrincipleUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/UserFilterDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/UserResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/repository/UserSpecification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/resource/UserResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/IUserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/util/GlobalResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/util/Paging.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/util/Util.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/auth.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/auth.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/validators/custom.validators.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/core.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/component/notification.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/models/chat.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/models/user.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/websocket.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/users/user.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/users/users.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/uploads/2025-12-31/1_d49618fb_1FC53580-9716-4288-B037-7CBE14B3EDD7.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM-PRACTICE/TERRAFORM-DAY-01/terraform.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/main.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/provider.tf" afterDir="false" />
@@ -440,45 +360,17 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/ErrorMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/ErrorMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/entity/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/model/MessageRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/model/MessageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/repository/MessageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/resource/MessageResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/service/IMessageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/message/service/MessageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/model/DashboardResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/resource/DashboardResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/shared/GlobalResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/admin.routes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/analytics/system-analytics.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/create/create.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/create/create.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/message.model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/messages.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/messages.route.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/messages/messages.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/ConversationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/AuthenticationEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/AuthenticationEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chats.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chats.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/conversation-users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/conversation-users.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/models/user.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/websocket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/websocket.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -692,7 +584,7 @@
       <updated>1766328952303</updated>
       <workItem from="1766328954732" duration="6556000" />
       <workItem from="1766846461164" duration="746000" />
-      <workItem from="1766847217283" duration="74107000" />
+      <workItem from="1766847217283" duration="86996000" />
     </task>
     <servers />
   </component>
@@ -703,22 +595,32 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/resource/WebSocketMessageResource.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketService.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="24" />
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/resource/AuthenticationResource.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/chat/service/WebSocketEventListener.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.security.authentication.UsernamePasswordAuthenticationToken" memberName="principal" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.apollographql.ijplugin.settings.ProjectSettingsState">
     <option name="hasEnabledGraphQLPluginApolloKotlinSupport" value="true" />

@@ -42,24 +42,20 @@ import {UserResponse} from "../users/user.model"
                 </p>
               </div>
 
-              <p
-                class="truncate text-xs"
-                [ngClass]="{
+              <p class="truncate text-xs"
+                 [ngClass]="{
                     'font-bold text-indigo-900 opacity-100': (counts[conversation.id] > 0),
-                    'font-normal text-slate-500 opacity-75': !(counts[conversation.id] > 0)
-                  }"
-              >
-                {{ getLastMessageContent(conversation.lastMessage) }}
+                    'font-normal text-slate-500 opacity-75': !(counts[conversation.id] > 0),
+                    'italic text-indigo-400/80': !conversation.lastMessage.content
+                  }">
+                {{ conversation?.lastMessage?.content ? getLastMessageContent(conversation.lastMessage) : 'No message yet!' }}
               </p>
             </div>
 
-            @if (counts[conversation.id] > 0) {
-              <span
-                class="text-[11px] font-bold h-5 w-5 bg-red-600 text-white flex justify-center items-center rounded-full">
-                {{ counts[conversation.id] }}
-              </span>
-            }
-
+            <span *ngIf="counts[conversation.id] > 0"
+                  class="text-[11px] font-bold h-5 w-5 bg-red-600 text-white flex justify-center items-center rounded-full">
+              {{ counts[conversation.id] }}
+            </span>
           </div>
         </ng-container>
       </ng-container>
@@ -67,6 +63,7 @@ import {UserResponse} from "../users/user.model"
   `,
 })
 export class ConversationUsersComponent {
+
   @Input("conversations") conversations$!: Observable<ConversationResponse[]>
   @Input() selectedConversationId: number | null = null
   @Output() conversationSelected = new EventEmitter<ConversationResponse>();
@@ -77,8 +74,7 @@ export class ConversationUsersComponent {
   }
 
   getLastMessageContent(lastMessage: any): string {
-    if (!lastMessage) return 'No messages yet';
-    return typeof lastMessage === 'string' ? lastMessage : lastMessage.content;
+    return typeof lastMessage === 'string' ? lastMessage : lastMessage?.content || '';
   }
 
   getOtherParticipant(conversation: ConversationResponse): UserResponse | undefined {

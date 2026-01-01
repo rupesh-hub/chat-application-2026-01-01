@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {GlobalResponse} from '../core/core.model';
 import {WebSocketService} from '../shared/services/websocket.service';
+import {StatusNotification} from '../shared/models/user.model';
 
 @Injectable({providedIn: "root"})
 export class ChatsService {
@@ -105,4 +106,26 @@ export class ChatsService {
   resetUnreadCount(id: number) {
     this.webSocketService.resetUnreadCount(id);
   }
+
+  public updatePartnerStatus(notification: StatusNotification): void {
+    const currentConversations = this.conversationsSubject.value;
+    const updated: ConversationResponse[] = currentConversations.map((conv: ConversationResponse) => {
+      // 1. Check if this conversation has the participant mentioned in the notification
+      if (conv.participant && conv.participant.email === notification.userId) {
+        // 2. Return a deep copy with the updated status
+        return {
+          ...conv,
+          participant: {
+            ...conv.participant,
+            status: notification.status.toLowerCase() // Ensure it matches 'online' | 'offline'
+          }
+        } as ConversationResponse; // Explicitly cast to satisfy the compiler
+      }
+      // 3. Return original if no change
+      return conv;
+    });
+
+    this.conversationsSubject.next(updated);
+  }
+
 }

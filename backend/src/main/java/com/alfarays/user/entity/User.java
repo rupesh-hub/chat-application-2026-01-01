@@ -41,4 +41,7 @@ public class User extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Image profile;
 
+    private String status = "OFFLINE";
+    private LocalDateTime lastSeen;
+
 }

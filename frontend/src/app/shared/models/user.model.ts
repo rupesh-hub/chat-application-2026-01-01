@@ -20,3 +20,9 @@ export interface LoginResponse {
   statusCode: number
   data: UserSession
 }
+
+export interface StatusNotification {
+  userId: string;
+  status: 'ONLINE' | 'OFFLINE';
+  timestamp: string;
+}

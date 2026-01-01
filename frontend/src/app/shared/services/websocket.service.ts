@@ -4,6 +4,7 @@ import {Client} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import {API} from "../../constants";
 import {ConversationResponse, MessageResponse} from "../../chats/chat.model";
+import {StatusNotification} from '../models/user.model';
 
 @Injectable({providedIn: "root"})
 export class WebSocketService implements OnDestroy {
@@ -24,6 +25,9 @@ export class WebSocketService implements OnDestroy {
 
   private unreadCountsSubject = new BehaviorSubject<Record<string, number>>({});
   unreadCounts$ = this.unreadCountsSubject.asObservable();
+
+  private statusSubject = new Subject<StatusNotification>();
+  public userStatus$ = this.statusSubject.asObservable();
 
   constructor() {
   }
@@ -58,10 +62,17 @@ export class WebSocketService implements OnDestroy {
         this.sentAckSubject.next(message);
       });
 
+      /*unread message count*/
       this.client!.subscribe("/user/queue/unread-count", msg => {
         const data = JSON.parse(msg.body);
         const count = (this.activeConversationId?.toString() === data.conversationId.toString()) ? 0 : data.unreadCount;
         this.updateBadgeMap(data.conversationId, count);
+      });
+
+      /*ONLINE or OFFLINE STATUS*/
+      this.client!.subscribe('/user/queue/status', (message) => {
+        const payload = JSON.parse(message.body);
+        this.statusSubject.next(payload);
       });
 
       this.client!.subscribe("/user/queue/messages-read", msg => {
