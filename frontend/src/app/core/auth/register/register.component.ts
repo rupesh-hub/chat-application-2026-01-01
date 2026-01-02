@@ -9,10 +9,11 @@ import { MessageType } from '../../../shared/component/notification.model';
 import { NotificationComponent } from '../../../shared/component/notification.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'chat-register',
-  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent, NotificationComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent, NotificationComponent, RouterLink],
   standalone: true,
   templateUrl: './register.component.html',
   styles: [`

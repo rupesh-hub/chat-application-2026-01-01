@@ -45,11 +45,19 @@ public class WebSocketService {
     }
 
     private void broadcastStatusChange(String userId, String status) {
-        // Update DB so the "Last Seen" is preserved
         userRepository.findByEmail(userId).ifPresent(user -> {
-            user.setStatus(status);
-            if(status.equals("OFFLINE")) user.setLastSeen(LocalDateTime.now());
-            userRepository.save(user);
+            if(status.equals("OFFLINE")) {
+                if(!user.getStatus().equals("OFFLINE")) {
+                    user.setStatus(status);
+                    user.setLastSeen(LocalDateTime.now());
+                    userRepository.save(user);
+                }
+            } else {
+                if(!user.getStatus().equals("ONLINE")) {
+                    user.setStatus(status);
+                    userRepository.save(user);
+                }
+            }
         });
 
         // Notify all partners
@@ -101,7 +109,6 @@ public class WebSocketService {
         userRepository.save(requester);
 
         // 2. Fetch all conversations where the requester is a participant
-        // Use a high PageRequest or a List return type in your repo
         List<Conversation> conversations = conversationRepository
                 .findActiveConversationsByUsername(requesterEmail, PageRequest.of(0, 1000));
 
@@ -114,7 +121,6 @@ public class WebSocketService {
             userRepository.findByEmail(partnerEmail).ifPresent(partner -> {
 
                 // ACTION A: Tell the Partner that the Requester is now ONLINE
-                // This updates the partner's UI if they were already logged in
                 messagingTemplate.convertAndSendToUser(
                         partnerEmail,
                         "/queue/status",
@@ -122,7 +128,6 @@ public class WebSocketService {
                 );
 
                 // ACTION B: Tell the Requester what this Partner's status is
-                // This is the CRITICAL fix for the refresh issue
                 messagingTemplate.convertAndSendToUser(
                         requesterEmail,
                         "/queue/status",

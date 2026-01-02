@@ -198,4 +198,21 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   trackByUserId(_: number, user: UserResponse) {
     return user.id;
   }
+
+  // Function to calculate time difference and return a human-readable string using ternary operators
+  getLastActiveStatus(lastSeen: string): string {
+    const now = new Date();
+    const lastActiveTime = new Date(lastSeen);
+    const diffInSeconds = Math.floor((now.getTime() - lastActiveTime.getTime()) / 1000);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    return (diffInMinutes < 60)
+      ? `Last active ${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`
+      : (diffInHours < 24)
+        ? `Last active ${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`
+        : `Last active ${diffInDays} day${diffInDays !== 1 ? 's' : ''} ago`;
+  }
+
 }

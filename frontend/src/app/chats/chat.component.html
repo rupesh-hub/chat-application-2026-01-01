@@ -68,7 +68,7 @@
           class="h-20 border-b border-slate-200/60 bg-white backdrop-blur-md flex items-center px-8 shadow-sm flex-shrink-0 z-20">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
-              <img class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
+              <img class="w-12 h-12 rounded-full object-cover border-2 border-slate-200 border-dotted p-0.5"
                    [src]="conversation.avatar" alt="Profile">
 
               <div>
@@ -81,7 +81,7 @@
                   </span>
                   <p class="text-[10px] font-semibold uppercase tracking-wider"
                      [ngClass]="conversation.participant.status === 'online' ? 'text-emerald-600' : 'text-slate-400'">
-                    {{ conversation.participant.status === 'online' ? 'Active Now' : 'Offline' }}
+                    {{ conversation.participant.status === 'online' ? 'Active Now' : getLastActiveStatus(conversation?.participant?.lastSeen) }}
                   </p>
                 </div>
               </div>
@@ -119,7 +119,7 @@
                     class="text-[10px] opacity-70 font-bold uppercase tracking-tighter">{{ msg.createdAt | date:'shortTime' }}</span>
                   <div class="flex items-center"
                        *ngIf="msg.senderId === (authService.authenticatedUser$ | async)?.email">
-                    <svg *ngIf="msg.isSeen" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-sky-300">
+                    <svg *ngIf="msg.isSeen" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-sky-50">
                       <path d="M4 12L9 17L20 6M9 12L14 17L25 6" stroke="currentColor" stroke-width="3"
                             stroke-linecap="round" stroke-linejoin="round" class="opacity-80"/>
                     </svg>
@@ -138,7 +138,7 @@
         <footer class="px-6 py-4 bg-transparent z-20">
           <div class="max-w-4xl mx-auto flex items-center gap-3">
             <div
-              class="flex-1 flex items-center gap-3 bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-[1.5rem] border border-slate-200/60 shadow-lg focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300">
+              class="flex-1 flex items-center gap-3 bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-[1.5rem] border border-slate-200/60 shadow-sm focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300">
               <button class="text-slate-400 hover:text-indigo-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">

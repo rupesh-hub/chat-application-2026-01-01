@@ -15,5 +15,9 @@ export const routes: Routes = [
     path: 'chats',
     loadChildren: () => import("./chats/chat.routes").then((m) => m.chatRoutes),
     canActivate: [authGuard]
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.routes').then((m) => m.usersRoutes),
   }
 ];

@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center px-4">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md text-center">
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-2">
+      <i class="fa-solid fa-shield-halved mr-2 text-indigo-600"></i>
+      Verify OTP
+    </h2>
+
+    <p class="text-sm text-gray-500 mb-6">
+      Enter the 6-digit code sent to your email
+    </p>
+
+    <!-- OTP Inputs -->
+    <form (ngSubmit)="submitOtp()" class="flex justify-center gap-2 mb-6">
+      <input
+        *ngFor="let ctrl of otpControls; let i = index"
+        type="text"
+        maxlength="1"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        class="w-12 h-12 text-center text-xl font-semibold border rounded-md
+               border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [formControl]="ctrl"
+        (input)="onInput($event, i)"
+        (keydown)="onKeyDown($event, i)"
+        (paste)="onPaste($event)"
+      />
+    </form>
+
+    <!-- Info -->
+    <div class="text-xs text-gray-500 mb-4 flex justify-center items-center gap-2">
+      <i class="fa-solid fa-circle-info text-indigo-600"></i>
+      Code expires in 5 minutes
+    </div>
+
+    <!-- Submit -->
+    <button
+      class="w-full flex items-center justify-center gap-2 py-2 rounded-md
+             bg-indigo-700 text-white font-medium hover:bg-indigo-800
+             disabled:opacity-50"
+      [disabled]="loading"
+    >
+      <i class="fa-solid fa-check"></i>
+      Verify
+    </button>
+
+  </div>
+</div>

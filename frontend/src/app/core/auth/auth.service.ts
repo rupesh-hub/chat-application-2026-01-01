@@ -95,4 +95,25 @@ export class AuthService {
     this.webSocketService.disconnect();
     this.router.navigate(["/auth/login"]);
   }
+
+  public forgotPasswordRequest = (email): Observable<GlobalResponse<any>> => {
+    return this.http.get<GlobalResponse<any>>(`${this.BASE_URL}/forgot-password-request?email=${email}`)
+      .pipe(
+        map((response: GlobalResponse<any>) => response.data)
+      );
+  }
+
+  public resetPassword = (request: any): Observable<GlobalResponse<any>> => {
+    return this.http.post<GlobalResponse<any>>(`${this.BASE_URL}/reset-password`, request)
+      .pipe(
+        map((response: GlobalResponse<any>) => response.data)
+      );
+  }
+
+  public changePassword = (request: any): Observable<GlobalResponse<any>> => {
+    return this.http.post<GlobalResponse<any>>(`${this.BASE_URL}/change-password`, request)
+      .pipe(
+        map((response: GlobalResponse<any>) => response.data)
+      );
+  }
 }
