@@ -12,20 +12,25 @@
     </p>
 
     <!-- OTP Inputs -->
-    <form (ngSubmit)="submitOtp()" class="flex justify-center gap-2 mb-6">
-      <input
-        *ngFor="let ctrl of otpControls; let i = index"
-        type="text"
-        maxlength="1"
-        inputmode="numeric"
-        autocomplete="one-time-code"
-        class="w-12 h-12 text-center text-xl font-semibold border rounded-md
+    <form (ngSubmit)="submitOtp()" class="flex flex-col gap-2">
+      <div *ngIf="_notificationService.message$ | async as message">
+        <chat-notification [message]="message"/>
+      </div>
+      <div class="flex justify-center gap-2 mb-6 ">
+        <input
+          *ngFor="let ctrl of otpControls; let i = index"
+          type="text"
+          maxlength="1"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          class="w-12 h-12 text-center text-xl font-semibold border rounded-md
                border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
-        [formControl]="ctrl"
-        (input)="onInput($event, i)"
-        (keydown)="onKeyDown($event, i)"
-        (paste)="onPaste($event)"
-      />
+          [formControl]="ctrl"
+          (input)="onInput($event, i)"
+          (keydown)="onKeyDown($event, i)"
+          (paste)="onPaste($event)"
+        />
+      </div>
     </form>
 
     <!-- Info -->

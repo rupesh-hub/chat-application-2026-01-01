@@ -1,12 +1,11 @@
 export enum MessageType {
+  Success = 'Success',
   Error = 'Error',
   Warn = 'Warn',
-  Success = 'Success',
-  Other = 'Other',
+  Other = 'Other'
 }
 
-// Notification message type
-export type NotificationMessage = {
+export interface NotificationMessage {
   message: string;
   type: MessageType;
   timestamp: string;

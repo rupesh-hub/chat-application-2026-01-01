@@ -1,15 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from '../auth.service';
+import {ActivatedRoute} from '@angular/router';
+import {NotificationService} from '../../../shared/services/notification.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MessageType} from '../../../shared/component/notification.model';
+import {NotificationComponent} from '../../../shared/component/notification.component';
 
 @Component({
   selector: 'ums-otp-validator',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent],
   standalone: true,
   templateUrl: './otp-validator.component.html',
   styles: ``
 })
-export class OtpValidatorComponent {
+export class OtpValidatorComponent implements OnInit {
+
+  private _authService: AuthService = inject(AuthService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private email: string = '';
+  protected _notificationService: NotificationService = inject(NotificationService);
 
   loading = false;
 
@@ -21,6 +32,10 @@ export class OtpValidatorComponent {
     d4: new FormControl(''),
     d5: new FormControl(''),
   });
+
+  ngOnInit() {
+    this.email = this.route.snapshot.paramMap.get('email');
+  }
 
   get otpControls() {
     return Object.values(this.otpForm.controls);
@@ -74,12 +89,29 @@ export class OtpValidatorComponent {
   submitOtp() {
     if (this.loading) return;
 
-    const otp = this.getOtpValue();
-    if (otp.length !== 6) return;
+    const token = this.getOtpValue();
+    if (token.length !== 6) return;
 
     this.loading = true;
-    console.log('OTP Submitted:', otp);
+    this._authService.confirmEmail(token, this.email)
+      .subscribe({
+        next: () => {
+          this.notify('Account has been successfully activated !', MessageType.Success)
+        },
+        error: (error: HttpErrorResponse) => {
+          this.notify(error.error?.message || error?.message || 'Something went wrong. Please try again.',
+            MessageType.Error)
+        }
+      })
 
+  }
+
+  private notify = (message: string, type: MessageType) => {
+    this._notificationService.publish({
+      message: message,
+      timestamp: new Date().toString(),
+      type: type
+    });
   }
 
 

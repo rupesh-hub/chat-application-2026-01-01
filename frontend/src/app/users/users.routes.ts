@@ -7,10 +7,6 @@ export const usersRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'change-password',
-    loadComponent: () => import('./change-password/change-password.component').then(m => m.ChangePasswordComponent)
-  },
-  {
     path: 'profile',
     loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent)
   }

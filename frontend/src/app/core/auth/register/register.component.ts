@@ -1,19 +1,18 @@
-import { Component, inject, type OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormErrorComponent } from '../../../shared/form-validation/form-error.component';
-import { CustomValidators } from '../validators/custom.validators';
-import { AuthService } from '../auth.service';
-import { NotificationService } from '../../../shared/services/notification.service';
-import { MessageType } from '../../../shared/component/notification.model';
-import { NotificationComponent } from '../../../shared/component/notification.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { finalize } from 'rxjs';
+import {Component, inject, type OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormErrorComponent} from '../../../shared/form-validation/form-error.component';
+import {CustomValidators} from '../validators/custom.validators';
+import {AuthService} from '../auth.service';
+import {NotificationService} from '../../../shared/services/notification.service';
+import {MessageType} from '../../../shared/component/notification.model';
+import {HttpErrorResponse} from '@angular/common/http';
+import {finalize} from 'rxjs';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'chat-register',
-  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent, NotificationComponent, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent, RouterLink],
   standalone: true,
   templateUrl: './register.component.html',
   styles: [`
@@ -47,7 +46,8 @@ export class RegisterComponent implements OnInit {
   protected selectedImage: File | null = null;
   protected imagePreview: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -64,11 +64,7 @@ export class RegisterComponent implements OnInit {
   protected onRegister = () => {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
-      this._notificationService.publish({
-        message: 'Please fill all required fields correctly!',
-        timestamp: new Date().toString(),
-        type: MessageType.Error
-      });
+      this.notify('Please fill all required fields correctly!', MessageType.Error);
       return;
     }
 
@@ -76,7 +72,7 @@ export class RegisterComponent implements OnInit {
     const formData = new FormData();
 
     // Extract values except confirmPassword
-    const { firstname, lastname, email, password } = this.registerForm.value;
+    const {firstname, lastname, email, password} = this.registerForm.value;
 
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
@@ -90,20 +86,14 @@ export class RegisterComponent implements OnInit {
     this._authService.register(formData)
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-        next: (response) => {
-          this._notificationService.publish({
-            message: 'Registration successful!',
-            timestamp: new Date().toString(),
-            type: MessageType.Success
-          });
-          // Redirect logic here if needed
+        next: () => {
+          this.notify('You have been successfully register to our system !', MessageType.Success);
         },
         error: (error: HttpErrorResponse) => {
-          this._notificationService.publish({
-            message: error.error?.message || 'Registration failed. Please try again.',
-            timestamp: new Date().toString(),
-            type: MessageType.Error
-          });
+          let errorMsg = 'An unexpected error occurred.';
+          if (error.status === 403) errorMsg = 'Account disabled. Please verify your email.';
+          if (error.error?.message) errorMsg = error.error.message;
+          this.notify(errorMsg, MessageType.Error);
         }
       });
   }
@@ -126,7 +116,23 @@ export class RegisterComponent implements OnInit {
     else this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-  protected get firstname() { return this.registerForm.get('firstname')!; }
-  protected get lastname() { return this.registerForm.get('lastname')!; }
-  protected control(name: string) { return this.registerForm.get(name)!; }
+  protected get firstname() {
+    return this.registerForm.get('firstname')!;
+  }
+
+  protected get lastname() {
+    return this.registerForm.get('lastname')!;
+  }
+
+  protected control(name: string) {
+    return this.registerForm.get(name)!;
+  }
+
+  private notify = (message: string, type: MessageType) => {
+    this._notificationService.publish({
+      message: message,
+      timestamp: new Date().toString(),
+      type: type
+    });
+  }
 }

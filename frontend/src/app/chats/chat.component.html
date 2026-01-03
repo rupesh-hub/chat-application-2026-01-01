@@ -29,9 +29,6 @@
       </div>
 
       <div class="px-4 pt-4 pb-3 flex-shrink-0">
-        <div *ngIf="_notificationService.message$ | async as message" class="mb-2">
-          <chat-notification [message]="message"/>
-        </div>
         <button
           class="w-full px-4 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 font-medium shadow-md active:scale-[0.98]"
           (click)="openNewConversation()">
@@ -286,7 +283,9 @@
             </p>
 
             <button
-              class="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-50 group transition-all">
+              class="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-50 group transition-all"
+              routerLink="/users/profile"
+            >
               <div class="flex items-center gap-4">
                 <div class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"

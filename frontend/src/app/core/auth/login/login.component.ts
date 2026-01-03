@@ -6,11 +6,10 @@ import {AuthService} from '../auth.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NotificationService} from '../../../shared/services/notification.service';
 import {MessageType} from '../../../shared/component/notification.model';
-import {NotificationComponent} from '../../../shared/component/notification.component';
 
 @Component({
   selector: 'chat-login',
-  imports: [CommonModule, FormsModule, RouterLink, NotificationComponent],
+  imports: [CommonModule, FormsModule, RouterLink],
   standalone: true,
   templateUrl: './login.component.html',
 })
@@ -45,15 +44,23 @@ export class LoginComponent implements OnInit {
   protected onLogin(): void {
     this._authService.login(this.authenticationForm.value).subscribe(
       {
+        next: () => {
+          this.notify('Authentication success !', MessageType.Error)
+        },
         error: (error: HttpErrorResponse) => {
-          this._notificationService.publish({
-            message: error.message || error.error?.message || 'Login failed. Please try again.',
-            timestamp: new Date().toString(),
-            type: MessageType.Error
-          });
+          const message: string = error.message || error.error?.message || 'Login failed. Please try again.';
+          this.notify(message, MessageType.Error)
         }
       }
     );
+  }
+
+  private notify = (message: string, type: MessageType) => {
+    this._notificationService.publish({
+      message: message,
+      timestamp: new Date().toString(),
+      type: type
+    });
   }
 
 

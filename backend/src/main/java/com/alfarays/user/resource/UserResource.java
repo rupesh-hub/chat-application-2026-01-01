@@ -1,16 +1,20 @@
 package com.alfarays.user.resource;
 
 
-import com.alfarays.authentication.model.RegistrationRequest;
+import com.alfarays.exceptions.AuthorizationException;
+import com.alfarays.user.model.ChangePasswordRequest;
 import com.alfarays.user.model.UserFilterDTO;
 import com.alfarays.user.model.UserResponse;
+import com.alfarays.user.model.UserUpdateRequest;
 import com.alfarays.user.service.IUserService;
 import com.alfarays.util.GlobalResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,15 +40,23 @@ public class UserResource {
         return ResponseEntity.ok(userService.byEmail(email));
     }
 
+    @GetMapping("/current")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GlobalResponse<UserResponse>> profile(Authentication authentication) {
+        if(null == authentication) throw new AuthorizationException("Authentication failure ! Please sign in first.");
+        else if(!authentication.isAuthenticated()) throw new AuthorizationException("Please sign in first.");
+        return ResponseEntity.ok(userService.byEmail(authentication.getName()));
+    }
+
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GlobalResponse<Boolean>> update(
-            @RequestBody final RegistrationRequest request,
-            @RequestParam(name = "username") String username,
-            @RequestParam(required = false) MultipartFile profile
-
+    public ResponseEntity<GlobalResponse<UserResponse>> update(
+            @RequestBody final UserUpdateRequest request,
+            Authentication authentication
     ) throws IOException {
-        return ResponseEntity.ok(userService.update(request, username, profile));
+        if(null == authentication) throw new AuthorizationException("Authentication failure ! Please sign in first.");
+        else if(!authentication.isAuthenticated()) throw new AuthorizationException("Please sign in first.");
+        return ResponseEntity.ok(userService.update(request, authentication.getName()));
     }
 
     @DeleteMapping
@@ -71,4 +83,26 @@ public class UserResource {
         return userService.filterUsers(filter, pageable);
     }
 
+
+    @PostMapping("/change-password")
+    public ResponseEntity<GlobalResponse<String>> passwordReset(
+            @RequestBody @Valid ChangePasswordRequest request,
+            Authentication authentication
+    ) {
+        if(null == authentication) throw new AuthorizationException("Authentication failure ! Please sign in first.");
+        else if(!authentication.isAuthenticated()) throw new AuthorizationException("Please sign in first.");
+        return ResponseEntity.ok(userService.changePassword(request, authentication.getName()));
+    }
+
+    @PutMapping("/change-profile")
+    public ResponseEntity<GlobalResponse<String>> changeProfilePicture(
+            @RequestPart(value = "profile", required = false) MultipartFile profile,
+            Authentication authentication
+    ) {
+        if(null == authentication) throw new AuthorizationException("Authentication failure ! Please sign in first.");
+        else if(!authentication.isAuthenticated()) throw new AuthorizationException("Please sign in first.");
+        return ResponseEntity.ok(
+                this.userService.changeProfilePicture(profile, authentication.getName())
+        );
+    }
 }

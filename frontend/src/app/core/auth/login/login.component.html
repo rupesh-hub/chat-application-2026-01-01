@@ -19,10 +19,6 @@
 
       <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="space-y-6 bg-slate-50 px-10 py-4 rounded shadow">
 
-        <div *ngIf="_notificationService.message$ | async as message">
-          <chat-notification [message]="message"/>
-        </div>
-
         <div>
           <div class="space-y-1">
             <label class="text-sm font-medium text-slate-700">Email</label>

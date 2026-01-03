@@ -43,5 +43,6 @@ public class User extends AbstractEntity {
 
     private String status = "OFFLINE";
     private LocalDateTime lastSeen;
+    private Boolean enabled = Boolean.FALSE;
 
 }

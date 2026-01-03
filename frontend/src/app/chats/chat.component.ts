@@ -24,12 +24,12 @@ import {StatusNotification} from '../shared/models/user.model';
 import {NotificationService} from '../shared/services/notification.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MessageType} from '../shared/component/notification.model';
-import {NotificationComponent} from '../shared/component/notification.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: "chat-chat",
   standalone: true,
-  imports: [CommonModule, FormsModule, ConversationUsersComponent, NotificationComponent],
+  imports: [CommonModule, FormsModule, ConversationUsersComponent, RouterLink],
   templateUrl: "./chat.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [

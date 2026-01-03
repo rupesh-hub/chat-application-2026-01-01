@@ -19,10 +19,10 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-  #  thymeleaf:
-  #    cache: false
-  #    prefix: classpath:/templates/
-  #    suffix: .html
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
 
   mvc:
     static-path-pattern: /uploads/**
@@ -35,6 +35,25 @@ spring:
   web:
     resources:
       static-locations: "file:./backend/uploads/"
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:admin}
+    password: ${MAIL_PASSWORD:admin}
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+          auth: true
+          starttls:
+            enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
 
 
 server:
@@ -44,6 +63,10 @@ server:
       timeout: 1h
 
 application:
+  email:
+    account_activation_url: ${ACCOUNT_ACTIVATION_URL:http://localhost:4200/activate-account}
+    reset_password_url: ${RESET_PASSWORD_URL:http://localhost:4200/auth/reset-password}
+    change_password_request_url: ${CHANGE_PASSWORD_REQUEST_URL:http://localhost:4200/change-password/%s}
   security:
     token:
       secret_key: ${SECRET_KEY:TSHKAHSHSGSTBNSGJKSWUYGWBJBTUHHSGDSGVDVSGHXWYTFGYUHJHCVXSHCFYGSDBSBVCHGSFCYTWGJBCNBVS}

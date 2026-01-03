@@ -13,10 +13,13 @@ public class UserResponse {
 
     private Long id;
     private String name;
+    private String firstname;
+    private String lastname;
     private String email;
     private String role;
     private String profile;
     private String status;
     private String lastSeen;
+    private String createdAt;
 
 }

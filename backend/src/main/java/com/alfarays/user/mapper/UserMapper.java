@@ -26,11 +26,14 @@ public final class UserMapper {
         return UserResponse
                 .builder()
                 .id(user.getId())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .name(name(user.getFirstname(), user.getLastname()))
                 .email(user.getEmail())
                 .profile(null != user.getProfile() ? user.getProfile().getPath() : null)
                 .status("online")
                 .lastSeen(LocalDateTime.now().toString())
+                .createdAt(user.getCreatedOn().toString())
                 .build();
     }
 

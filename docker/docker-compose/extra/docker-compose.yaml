@@ -1,0 +1,19 @@
+services:
+  maildev:
+    image: maildev/maildev
+    container_name: maildev
+    environment:
+      - MAIL_HOST=localhost
+      - MAIL_PORT=1025
+      - MAIL_USERNAME=admin
+      - MAIL_PASSWORD=admin
+    ports:
+      - "1080:1080"  # Web UI
+      - "1025:1025"  # SMTP
+    networks:
+      - mail-dev
+    restart: always
+
+networks:
+  mail-dev:
+    driver: bridge

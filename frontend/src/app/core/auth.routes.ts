@@ -19,7 +19,7 @@ export const authRoutes: Routes = [
     loadComponent: () => import('./auth/reset-password/reset-password.component').then((c) => c.ResetPasswordComponent)
   },
   {
-    path: 'validate-otp',
+    path: 'confirm-email/:email',
     loadComponent: () => import('./auth/otp-validator/otp-validator.component').then((c) => c.OtpValidatorComponent)
   },
   {

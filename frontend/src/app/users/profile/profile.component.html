@@ -1,84 +1,285 @@
-<div class="min-h-screen bg-gray-50 py-12 px-4">
-  <div class="max-w-4xl mx-auto">
+<div class="min-h-screen bg-[#f8fafc] flex" *ngIf="user">
 
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col md:flex-row">
-
-      <div class="w-full md:w-1/3 bg-gray-900 p-8 text-center text-white">
-        <div class="relative inline-block mb-4">
-          <img [src]="user.avatar"
-               class="w-32 h-32 rounded-full border-4 border-gray-800 shadow-xl mx-auto object-cover">
-          <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-2 border-gray-900 rounded-full"></span>
-        </div>
-        <h2 class="text-xl font-bold">{{ user.firstName }} {{ user.lastName }}</h2>
-        <p class="text-gray-400 text-sm mb-6">{{ user.profile }}</p>
-
-        <div class="space-y-3 pt-6 border-t border-gray-800">
-          <button (click)="isEditing = !isEditing"
-                  class="w-full py-2 px-4 rounded-lg border border-gray-700 hover:bg-gray-800 transition-all text-sm font-medium">
-            <i class="fas" [ngClass]="isEditing ? 'fa-times mr-2' : 'fa-user-pen mr-2'"></i>
-            {{ isEditing ? 'Cancel' : 'Edit Profile' }}
-          </button>
-        </div>
-      </div>
-
-      <div class="flex-1 p-8 md:p-12">
-        <div class="flex justify-between items-center mb-8">
-          <h1 class="text-2xl font-semibold text-gray-800">Account Settings</h1>
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Verified Account</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <div class="space-y-2">
-            <label class="text-sm font-semibold text-gray-700">First Name</label>
-            <div class="relative">
-              <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              <input [(ngModel)]="user.firstName" [disabled]="!isEditing"
-                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all disabled:bg-gray-50 disabled:text-gray-500">
-            </div>
-          </div>
-
-          <div class="space-y-2">
-            <label class="text-sm font-semibold text-gray-700">Last Name</label>
-            <div class="relative">
-              <i class="fas fa-id-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              <input [(ngModel)]="user.lastName" [disabled]="!isEditing"
-                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all disabled:bg-gray-50 disabled:text-gray-500">
-            </div>
-          </div>
-
-          <div class="space-y-2 md:col-span-2">
-            <label class="text-sm font-semibold text-gray-700 flex items-center justify-between">
-              Email Address
-              <span class="text-[10px] text-gray-400"><i class="fas fa-lock mr-1"></i> READ ONLY</span>
-            </label>
-            <div class="relative">
-              <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              <input [value]="user.email" readonly
-                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-100 text-gray-500 cursor-not-allowed outline-none">
-            </div>
-          </div>
-
-          <div class="space-y-2 md:col-span-2">
-            <label class="text-sm font-semibold text-gray-700">Professional Title</label>
-            <div class="relative">
-              <i class="fas fa-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              <input [(ngModel)]="user.profile" [disabled]="!isEditing"
-                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all disabled:bg-gray-50 disabled:text-gray-500">
-            </div>
-          </div>
-
-        </div>
-
-        <div *ngIf="isEditing" class="mt-10 animate-fade-in">
-          <button (click)="saveChanges()"
-                  class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
-            <i class="fas fa-cloud-arrow-up"></i>
-            Submit Changes
-          </button>
-        </div>
-
-      </div>
+  <aside class="w-72 bg-white border-r border-slate-200 flex flex-col h-screen sticky top-0 shadow-sm">
+    <div class="p-6 border-b border-slate-100">
+      <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+        <i class="fas fa-cog text-indigo-600"></i> Settings
+      </h2>
     </div>
-  </div>
+
+    <nav class="flex-1 p-4 space-y-1">
+      <button (click)="activeTab = 'profile'; isChangingPassword = false"
+              [ngClass]="activeTab === 'profile' ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50'"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all">
+        <i class="fas fa-user-circle text-lg"></i> My Profile
+      </button>
+      <button (click)="activeTab = 'security'"
+              [ngClass]="activeTab === 'security' ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50'"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all">
+        <i class="fas fa-shield-alt text-lg"></i> Security & Password
+      </button>
+
+      <button (click)="activeTab = 'preferences'"
+              [ngClass]="activeTab === 'preferences' ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50'"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all">
+        <i class="fas fa-bell text-lg"></i> Chat Preferences
+      </button>
+
+      <div class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer text-slate-600"
+      routerLink="/chats">
+        <i class="fas fa-message text-lg"></i> Chats
+      </div>
+    </nav>
+
+    <div class="p-4 border-t border-slate-100">
+      <button (click)="logout()"
+              class="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl text-sm font-semibold transition-all">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto">
+
+    <header
+      class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-10 px-10 py-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-lg font-bold text-slate-800">{{ activeTab | titlecase }} Settings</h1>
+        <p class="text-xs text-slate-500">Manage your account information and privacy</p>
+      </div>
+
+      <div *ngIf="activeTab === 'profile'">
+        <button *ngIf="!isEditing" (click)="isEditing = true"
+                class="bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 shadow-lg shadow-indigo-100 flex items-center gap-2 transition-all">
+          <i class="fas fa-user-edit"></i> Edit Profile
+        </button>
+        <div *ngIf="isEditing" class="flex gap-2">
+          <button (click)="isEditing = false"
+                  class="px-5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-2">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button (click)="saveProfile()" [disabled]="isLoading"
+                  class="bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 flex items-center gap-2 disabled:opacity-50">
+            <i class="fas" [ngClass]="isLoading ? 'fa-spinner fa-spin' : 'fa-save'"></i> Save Changes
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-10">
+
+      <section *ngIf="activeTab === 'profile'" class="animate-in fade-in duration-500">
+        <div class="flex items-center gap-8 mb-12 p-8 bg-white border border-slate-200 rounded-3xl shadow-sm">
+          <div class="relative group">
+            <img [src]="user.profile"
+                 class="w-32 h-32 rounded-3xl object-cover ring-4 ring-slate-50 border border-slate-200 shadow-md"
+                 [alt]="user.name">
+            <button (click)="triggerFileInput()"
+                    class="absolute inset-0 bg-black/40 rounded-3xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white text-xs font-bold">
+              <i class="fas fa-camera text-xl mb-1"></i> UPDATE
+            </button>
+            <input type="file" #fileInput (change)="onFileSelected($event)" class="hidden" accept="image/*">
+            <div *ngIf="isUploading" class="absolute inset-0 bg-white/80 rounded-3xl flex items-center justify-center">
+              <i class="fas fa-spinner fa-spin text-indigo-600 text-xl"></i>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">{{ user.name }}</h2>
+            <p class="text-slate-500 mb-3">{{ user.firstname }} {{ user.lastname }}</p>
+            <div class="flex gap-4">
+              <span
+                class="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold border border-emerald-100 flex items-center gap-1.5">
+                <i class="fas fa-circle text-[8px]"></i> {{ user.status || 'Available' }}
+              </span>
+              <span class="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
+                <i class="fas fa-calendar-alt"></i> Member since {{ user.createdAt | date:'mediumDate' }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">First Name</label>
+            <div class="relative">
+              <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input [(ngModel)]="user.firstname" [disabled]="!isEditing"
+                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50">
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Last Name</label>
+            <div class="relative">
+              <i class="fas fa-signature absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input [(ngModel)]="user.lastname" [disabled]="!isEditing"
+                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50">
+            </div>
+          </div>
+
+          <div class="space-y-2 col-span-2">
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Work Email</label>
+            <div class="relative">
+              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <i class="fas fa-lock absolute right-4 top-1/2 -translate-y-1/2 text-slate-300"></i>
+              <input [value]="user.email" readonly
+                     class="w-full pl-11 pr-10 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed outline-none font-medium">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="activeTab === 'security'" class="animate-in slide-in-from-bottom-4 duration-500">
+
+        <div *ngIf="!isChangingPassword" class="space-y-6">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600">
+                <i class="fas fa-key text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800">Account Password</h3>
+                <p class="text-sm text-slate-500 flex items-center gap-1.5">
+                  <i class="fas fa-history text-xs"></i> Change your login credentials
+                </p>
+              </div>
+            </div>
+            <button (click)="togglePasswordChange()"
+                    class="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-all flex items-center gap-2">
+              <i class="fas fa-pen-nib"></i> Update Password
+            </button>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
+                <i class="fas fa-shield-virus text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800">Two-Factor Authentication</h3>
+                <p class="text-sm text-slate-500">Secure your account with MFA</p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div
+                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            </label>
+          </div>
+        </div>
+
+        <div *ngIf="isChangingPassword" class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+          <form #pwdForm="ngForm" (ngSubmit)="onUpdatePassword()">
+            <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <button type="button" (click)="togglePasswordChange()"
+                        class="w-8 h-8 rounded-full hover:bg-slate-200 flex items-center justify-center transition-all">
+                  <i class="fas fa-arrow-left text-slate-600"></i>
+                </button>
+                <h3 class="font-bold text-slate-800">Change Password</h3>
+              </div>
+              <i class="fas fa-lock text-slate-300"></i>
+            </div>
+
+            <div class="p-8 space-y-6">
+              <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Current Password</label>
+                <div class="relative">
+                  <i class="fas fa-shield-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input type="password" name="currentPassword"
+                         [(ngModel)]="passwordForm.currentPassword"
+                         placeholder="••••••••"
+                         #currentPassword="ngModel" required
+                         class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                </div>
+                <chat-form-error [control]="currentPassword"></chat-form-error>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">New Password</label>
+                  <div class="relative">
+                    <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="password" name="password"
+                           [(ngModel)]="passwordForm.password"
+                           placeholder="Min 8 characters"
+                           required #password="ngModel"
+                           chatPasswordValidator
+                           chatCurrentPasswordMatchValidator="currentPassword"
+                           class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                  </div>
+                  <chat-form-error [control]="password"></chat-form-error>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Confirm New
+                    Password</label>
+                  <div class="relative">
+                    <i class="fas fa-check-double absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="password" name="confirmPassword"
+                           [(ngModel)]="passwordForm.confirmPassword"
+                           placeholder="Match new password"
+                           required #confirmPassword="ngModel"
+                           chatPasswordMatchValidator="password"
+                           class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                  </div>
+                  <chat-form-error [control]="confirmPassword"></chat-form-error>
+                </div>
+              </div>
+
+              <div class="pt-4 flex items-center gap-3">
+                <button type="submit" [disabled]="pwdForm.invalid || isLoading"
+                        class="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 disabled:opacity-50">
+                  <i class="fas" [ngClass]="isLoading ? 'fa-spinner fa-spin' : 'fa-save'"></i> Save New Password
+                </button>
+                <button type="button" (click)="togglePasswordChange()"
+                        class="px-6 py-3 border border-slate-200 rounded-xl font-bold text-slate-600 hover:bg-slate-50 transition-all flex items-center gap-2">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section *ngIf="activeTab === 'preferences'"
+               class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+        <div
+          class="p-8 border-b border-slate-100 flex items-center justify-between hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="text-indigo-500"><i class="fas fa-desktop text-xl"></i></div>
+            <div>
+              <h4 class="font-bold text-slate-800">Desktop Notifications</h4>
+              <p class="text-sm text-slate-500">Receive alerts when you get a new message</p>
+            </div>
+          </div>
+          <input type="checkbox" [(ngModel)]="settings.notifications" class="w-5 h-5 accent-indigo-600 cursor-pointer">
+        </div>
+
+        <div
+          class="p-8 border-b border-slate-100 flex items-center justify-between hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="text-indigo-500"><i class="fas fa-check-double text-xl"></i></div>
+            <div>
+              <h4 class="font-bold text-slate-800">Read Receipts</h4>
+              <p class="text-sm text-slate-500">Show others when you've seen their messages</p>
+            </div>
+          </div>
+          <input type="checkbox" [(ngModel)]="settings.readReceipts" class="w-5 h-5 accent-indigo-600 cursor-pointer">
+        </div>
+
+        <div class="p-8 flex items-center justify-between bg-slate-50/30 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="text-indigo-500"><i class="fas fa-moon text-xl"></i></div>
+            <div>
+              <h4 class="font-bold text-slate-800">Dark Mode</h4>
+              <p class="text-sm text-slate-500">Switch to a dark color palette</p>
+            </div>
+          </div>
+          <input type="checkbox" [(ngModel)]="settings.darkMode" class="w-5 h-5 accent-indigo-600 cursor-pointer">
+        </div>
+      </section>
+
+    </div>
+  </main>
 </div>

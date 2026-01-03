@@ -1,53 +1,70 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NotificationMessage} from './notification.model';
+import {NotificationService} from '../services/notification.service';
 
 @Component({
   selector: 'chat-notification',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <ng-container *ngIf="message">
-      <div
-        [ngClass]="{
-          'bg-red-50 border-red-300': message.type === 'Error',
-          'bg-yellow-50 border-yellow-300': message.type === 'Warn',
-          'bg-green-50 border-green-300': message.type === 'Success',
-          'bg-gray-50 border-gray-300': message.type === 'Other'
-        }"
-        class="p-4 rounded border border-dashed"
-      >
-        <div class="flex items-center justify-start">
-          <ng-container *ngIf="message.type === 'Error'">
-            <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
-          </ng-container>
-          <ng-container *ngIf="message.type === 'Warn'">
-            <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
-          </ng-container>
-          <ng-container *ngIf="message.type === 'Success'">
-            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-          </ng-container>
-          <ng-container *ngIf="message.type === 'Other'">
-            <i class="fas fa-info-circle text-gray-500 mr-2"></i>
-          </ng-container>
-          <h5 class="text-xs italic font-serif font-semibold mt-0.5 flex justify-between items-center w-full"
-              [ngClass]="{
-                'text-red-700': message.type === 'Error',
-                'text-yellow-700': message.type === 'Warn',
-                'text-green-700': message.type === 'Success',
-                'text-gray-700': message.type === 'Other'
-              }"
-          >
-            <span>{{ message?.message }}</span>
-            <span>{{ message?.timestamp | date:'short' }}</span>
-          </h5>
-
+    <div *ngIf="message"
+         class="mb-6 animate-fade-in border-l-4 rounded-xl p-4 shadow-lg shadow-slate-100 transition-all"
+         [ngClass]="{
+           'bg-rose-50 border-rose-500 text-rose-900': message.type === 'Error',
+           'bg-amber-50 border-amber-500 text-amber-900': message.type === 'Warn',
+           'bg-emerald-50 border-emerald-500 text-emerald-900': message.type === 'Success',
+           'bg-slate-50 border-slate-500 text-slate-900': message.type === 'Other'
+         }">
+      <div class="flex items-start gap-3">
+        <div class="mt-0.5">
+          <i class="fas" [ngClass]="{
+            'fa-circle-xmark text-rose-500': message.type === 'Error',
+            'fa-triangle-exclamation text-amber-500': message.type === 'Warn',
+            'fa-circle-check text-emerald-500': message.type === 'Success',
+            'fa-circle-info text-slate-500': message.type === 'Other'
+          }"></i>
         </div>
+
+        <div class="flex-1">
+          <p class="text-sm font-bold leading-none mb-1 capitalize">{{ message.type }}</p>
+          <p class="text-sm opacity-90 font-medium">{{ message.message }}</p>
+          <p class="text-[10px] opacity-50 mt-2 tracking-wider uppercase font-bold">
+            {{ message.timestamp | date:'shortTime' }}
+          </p>
+        </div>
+
+        <button (click)="onClose()" class="text-slate-400 hover:text-slate-600 transition-colors">
+          <i class="fas fa-xmark"></i>
+        </button>
       </div>
-    </ng-container>
+    </div>
   `,
-  styles: ``
+  styles: [`
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `]
 })
 export class NotificationComponent {
-  @Input() message: NotificationMessage = null;
+  @Input() message: NotificationMessage | null = null;
+
+  constructor(private notificationService: NotificationService) {
+  }
+
+  onClose() {
+    // We access the service directly to clear the message
+    (this.notificationService as any).clearMessage();
+  }
 }

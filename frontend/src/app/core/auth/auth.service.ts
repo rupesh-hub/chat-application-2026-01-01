@@ -74,8 +74,18 @@ export class AuthService {
   public register(request: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}/register`, request).pipe(
       map((response: GlobalResponse<any>) => {
-        this.router.navigate(["/auth/login"]);
+        this.router.navigate(['/auth/confirm-email', response?.data]);
         return response;
+      }),
+      catchError((error: HttpErrorResponse) => throwError(() => error))
+    );
+  }
+
+  public confirmEmail(token: string, email: string): Observable<string> {
+    return this.http.get<GlobalResponse<string>>(`${this.BASE_URL}/confirm-email?token=${token}&email=${email}`).pipe(
+      map((response: GlobalResponse<string>) => {
+        this.router.navigate(["/auth/login"]);
+        return response.data;
       }),
       catchError((error: HttpErrorResponse) => throwError(() => error))
     );
@@ -96,24 +106,28 @@ export class AuthService {
     this.router.navigate(["/auth/login"]);
   }
 
-  public forgotPasswordRequest = (email): Observable<GlobalResponse<any>> => {
-    return this.http.get<GlobalResponse<any>>(`${this.BASE_URL}/forgot-password-request?email=${email}`)
+  public forgotPasswordRequest = (email): Observable<string> => {
+    return this.http.get<GlobalResponse<string>>(`${this.BASE_URL}/forgot-password-request?email=${email}`)
       .pipe(
-        map((response: GlobalResponse<any>) => response.data)
+        map((response: GlobalResponse<string>) => response.data),
+        catchError((error) => throwError(() => error))
       );
   }
 
-  public resetPassword = (request: any): Observable<GlobalResponse<any>> => {
-    return this.http.post<GlobalResponse<any>>(`${this.BASE_URL}/reset-password`, request)
+  public resetPassword = (request: any): Observable<string> => {
+    return this.http.post<GlobalResponse<string>>(`${this.BASE_URL}/reset-password`, request)
       .pipe(
-        map((response: GlobalResponse<any>) => response.data)
+        map((response: GlobalResponse<string>) => response.data),
+        catchError((error) => throwError(() => error))
       );
   }
 
-  public changePassword = (request: any): Observable<GlobalResponse<any>> => {
-    return this.http.post<GlobalResponse<any>>(`${this.BASE_URL}/change-password`, request)
+  public resendConfirmationToken = (email: string, token:string): Observable<string> => {
+    return this.http.get<GlobalResponse<string>>(`${this.BASE_URL}/resend-confirmation-token?email=${email}&token=${token}`)
       .pipe(
-        map((response: GlobalResponse<any>) => response.data)
+        map((response: GlobalResponse<string>) => response.data),
+        catchError((error) => throwError(() => error))
       );
   }
+
 }
