@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-config
-  namespace: chat-apps
+  namespace: chats
 data:
   MYSQL_DATABASE: "chats"
   MAIL_USERNAME: "dulalrupesh77@gmail.com"
