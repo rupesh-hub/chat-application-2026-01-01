@@ -242,10 +242,12 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      SPRING_PROFILES_ACTIVE: production
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chats
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      MAIL_USERNAME: dulalrupesh77@gmail.com
+      MAIL_PASSWORD: ggclrebptyukhthz
     healthcheck:
       test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
       interval: 30s

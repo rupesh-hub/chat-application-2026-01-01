@@ -5,7 +5,7 @@
    -t rupesh1997/chat-service-frontend:1.0.0 \
     -t rupesh1997/chat-service-frontend:latest \
    --build-arg CONFIGURATION=docker \
-   -f ../docker/frontend/Dockerfile . 
+   -f ../docker/frontend/Dockerfile .  
    
    # Run container
    docker run -d \
@@ -29,4 +29,5 @@
 
    ```shell
    docker kill chat-service-frontend backend-svc mysql && docker system prune -f && clear && docker ps
+   docker network connect chat-apps mysql
    ```

@@ -19,14 +19,10 @@
 
       <form class="space-y-5" [formGroup]="registerForm" (ngSubmit)="onRegister()">
 
-<!--        <div *ngIf="_notificationService.message$ | async as message">-->
-        <!--          <chat-notification [message]="message"/>-->
-        <!--        </div>-->
-
         <div class="flex flex-col items-center gap-3">
           <div class="relative">
             <img
-              [src]="imagePreview || 'https://ui-avatars.com/api/?name=User&background=EEF2FF&color=4F46E5&size=128'"
+              [src]="imagePreview() || 'https://ui-avatars.com/api/?name=User&background=EEF2FF&color=4F46E5&size=128'"
               class="w-28 h-28 rounded-full object-cover border-2 border-dashed border-indigo-200 p-1"
               alt="Profile Preview"
             />
@@ -91,10 +87,10 @@
                 class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 group-focus-within:text-indigo-600 pointer-events-none">
                 <i class="fa-solid fa-lock text-xs"></i>
               </span>
-              <input [type]="showPassword ? 'text' : 'password'" placeholder="••••••••" formControlName="password"/>
+              <input [type]="showPassword() ? 'text' : 'password'" placeholder="••••••••" formControlName="password"/>
               <button (click)="togglePasswordVisibility('pass')" type="button"
                       class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-indigo-600">
-                <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                <i class="fa-solid" [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'"></i>
               </button>
             </div>
             <chat-form-error [control]="control('password')"/>
@@ -107,11 +103,11 @@
                 class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 group-focus-within:text-indigo-600 pointer-events-none">
                 <i class="fa-solid fa-shield-halved text-xs"></i>
               </span>
-              <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="••••••••"
+              <input [type]="showConfirmPassword() ? 'text' : 'password'" placeholder="••••••••"
                      formControlName="confirmPassword"/>
               <button (click)="togglePasswordVisibility('confirm')" type="button"
                       class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-indigo-600">
-                <i class="fa-solid" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                <i class="fa-solid" [ngClass]="showConfirmPassword() ? 'fa-eye-slash' : 'fa-eye'"></i>
               </button>
             </div>
             <chat-form-error [parentForm]="registerForm" formErrorKey="mismatch"
@@ -119,10 +115,10 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="loading"
+        <button type="submit" [disabled]="loading()"
                 class="w-full py-4 bg-slate-900 hover:bg-black text-white font-bold rounded-xl shadow-xl shadow-slate-200 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:cursor-not-allowed">
-          <span *ngIf="!loading">Create Account</span>
-          <div *ngIf="loading" class="flex items-center gap-2">
+          <span *ngIf="!loading()">Create Account</span>
+          <div *ngIf="loading()" class="flex items-center gap-2">
             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -131,7 +127,7 @@
             </svg>
             <span>Processing...</span>
           </div>
-          <svg *ngIf="!loading" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+          <svg *ngIf="!loading()" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>

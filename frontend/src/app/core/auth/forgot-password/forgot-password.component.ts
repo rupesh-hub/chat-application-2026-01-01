@@ -6,6 +6,7 @@ import {NotificationService} from '../../../shared/services/notification.service
 import {MessageType} from '../../../shared/component/notification.model';
 import {AuthService} from '../auth.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'chat-forgot-password',
@@ -14,7 +15,9 @@ import {HttpErrorResponse} from '@angular/common/http';
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent implements OnInit, OnDestroy {
+
   @ViewChild("forgotPasswordForm") forgotPasswordForm!: NgForm;
+  private subs = new Subscription();
 
   email: string = '';
   isLoading: boolean = false;
@@ -31,6 +34,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopTimer();
+    this.subs.unsubscribe();
   }
 
   protected onEmailChange(): void {
@@ -89,24 +93,25 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const requestEmail = this.email.toLowerCase();
 
-    this._authService.forgotPasswordRequest(requestEmail).subscribe({
-      next: () => {
-        this.saveCooldownToStorage(requestEmail);
-        this.startTimer(15 * 60); // 15 Minutes
+    this.subs.add(this._authService.forgotPasswordRequest(requestEmail).subscribe({
+        next: () => {
+          this.saveCooldownToStorage(requestEmail);
+          this.startTimer(15 * 60); // 15 Minutes
 
-        this._notificationService.publish({
-          message: 'Success! Please check your email for the reset link.',
-          timestamp: new Date().toString(),
-          type: MessageType.Success
-        });
-        this.notify('Success! Please check your email for the reset link.', MessageType.Success);
-        this.isLoading = false;
-      },
-      error: (error: HttpErrorResponse) => {
-        this.isLoading = false;
-        this.notify(error.error?.message || 'An error occurred. Please try again.', MessageType.Error);
-      }
-    });
+          this._notificationService.publish({
+            message: 'Success! Please check your email for the reset link.',
+            timestamp: new Date().toString(),
+            type: MessageType.Success
+          });
+          this.notify('Success! Please check your email for the reset link.', MessageType.Success);
+          this.isLoading = false;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.notify(error.error?.message || 'An error occurred. Please try again.', MessageType.Error);
+        }
+      })
+    );
   }
 
   // --- Storage Helpers ---

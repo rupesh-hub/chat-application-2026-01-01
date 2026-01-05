@@ -55,24 +55,21 @@ spring:
       write-dates-as-timestamps: false
     default-property-inclusion: non_null
 
-
 server:
-  port: 8181
+  port: ${SERVER_PORT:8181}
   servlet:
     session:
       timeout: 1h
 
 application:
   email:
-    account_activation_url: ${ACCOUNT_ACTIVATION_URL:http://localhost:4200/activate-account}
     reset_password_url: ${RESET_PASSWORD_URL:http://localhost:4200/auth/reset-password}
-    change_password_request_url: ${CHANGE_PASSWORD_REQUEST_URL:http://localhost:4200/change-password/%s}
   security:
     token:
       secret_key: ${SECRET_KEY:TSHKAHSHSGSTBNSGJKSWUYGWBJBTUHHSGDSGVDVSGHXWYTFGYUHJHCVXSHCFYGSDBSBVCHGSFCYTWGJBCNBVS}
       expiration: ${TOKEN_TIME_TO_LIVE_IN_SEC:1200}
   cors:
-    allowed-origins: ${ALLOW_CORS_ORIGIN:http://localhost:3000,http://localhost:4200,http://192.168.1.70:3000}
+    allowed-origins: ${ALLOW_CORS_ORIGIN:http://localhost:4200,http://192.168.1.70:4200}
 
 logging:
   level:

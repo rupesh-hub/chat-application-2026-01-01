@@ -25,8 +25,9 @@
         <i class="fas fa-bell text-lg"></i> Chat Preferences
       </button>
 
-      <div class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer text-slate-600"
-      routerLink="/chats">
+      <div
+        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer text-slate-600"
+        routerLink="/chats">
         <i class="fas fa-message text-lg"></i> Chats
       </div>
     </nav>
@@ -104,7 +105,9 @@
             <div class="relative">
               <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
               <input [(ngModel)]="user.firstname" [disabled]="!isEditing"
-                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50">
+                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50"
+                     [ngClass]="isEditing?'border-indigo-400':''"
+              >
             </div>
           </div>
 
@@ -113,7 +116,9 @@
             <div class="relative">
               <i class="fas fa-signature absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
               <input [(ngModel)]="user.lastname" [disabled]="!isEditing"
-                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50">
+                     class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all disabled:text-slate-500 disabled:bg-slate-50/50"
+                     [ngClass]="isEditing?'border-indigo-400':''"
+              >
             </div>
           </div>
 
@@ -168,7 +173,7 @@
           </div>
         </div>
 
-        <div *ngIf="isChangingPassword" class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <div *ngIf="isChangingPassword" class="bg-white rounded-2xl shadow-sm border border-slate-200">
           <form #pwdForm="ngForm" (ngSubmit)="onUpdatePassword()">
             <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
               <div class="flex items-center gap-3">

@@ -95,29 +95,6 @@
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/java/com/alfarays/JenkinsDemoProject01Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/resources/application.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/test/java/com/alfarays/JenkinsDemoProject01ApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/model/ResetPasswordRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/configuration/MailConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/events/ForgotPasswordRequestEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/events/ForgotPasswordRequestEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/events/UserRegistrationEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/events/UserRegistrationEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/mail/enums/MailSubject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/mail/enums/MailTemplate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/mail/model/MailRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/mail/service/IMailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/mail/service/MailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/entity/Token.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/enums/DurationUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/enums/TokenType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/repository/TokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/service/ConfirmationTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/service/ITokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/token/util/TokenGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/ChangePasswordRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/UserUpdateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/templates/account-activation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/templates/forgot-password-request.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/docker-compose/extra/docker-compose.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM-PRACTICE/TERRAFORM-DAY-01/terraform.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/main.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/provider.tf" afterDir="false" />
@@ -382,45 +359,28 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/BackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/resource/AuthenticationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/resource/AuthenticationResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/IAuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/IAuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomSecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/security/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/model/UserResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/resource/UserResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/resource/UserResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/IUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/frontend-pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/frontend-pipeline.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/service/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/service/ImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/backend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/backend/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/frontend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/frontend/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/otp-validator/otp-validator.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/otp-validator/otp-validator.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/otp-validator/otp-validator.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/otp-validator/otp-validator.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/reset-password/reset-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/reset-password/reset-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/reset-password/reset-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/component/notification.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/component/notification.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/component/notification.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/component/notification.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/notification.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/change-password/change-password.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/change-password/change-password.component.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/user.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/users.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/users.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/users.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-default.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-docker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-docker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-production.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-production.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -638,7 +598,7 @@
       <workItem from="1766847217283" duration="86996000" />
       <workItem from="1767248693557" duration="19038000" />
       <workItem from="1767353895701" duration="11292000" />
-      <workItem from="1767434317316" duration="13981000" />
+      <workItem from="1767434317316" duration="24335000" />
     </task>
     <servers />
   </component>

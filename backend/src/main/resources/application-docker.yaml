@@ -1,7 +1,27 @@
+server:
+  forward-headers-strategy: native
 spring:
   config:
     activate:
       on-profile: "docker"
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:admin}
+    password: ${MAIL_PASSWORD:admin}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+application:
+  email:
+    reset_password_url: ${RESET_PASSWORD_URL:http://localhost:4200/auth/reset-password}
 
 info:
   app:
@@ -17,3 +37,4 @@ info:
     name: "Rupesh Dulal"
     email: "rupeshdulal672@gmail.com"
     github: "https://github.com/rupeshdulal"
+

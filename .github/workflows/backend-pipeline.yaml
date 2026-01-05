@@ -2,7 +2,7 @@ name: backend pipeline
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - 'backend/**'
       - 'docker/backend/Dockerfile'

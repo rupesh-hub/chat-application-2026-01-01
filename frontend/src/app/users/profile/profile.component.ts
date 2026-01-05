@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
           // Sync the new URL to the user object
           this.user.profile = res.url || res;
           this.isUploading = false;
-          this.notify('Avatar updated successfully', MessageType.Success);
+          this.notify('Profile picture updated successfully', MessageType.Success);
         },
         error: (error: HttpErrorResponse) => {
           this.isUploading = false;
@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
         this.user.firstname = response.firstname;
         this.user.lastname = response.lastname;
       },
-      error: (err) => {
+      error: () => {
         this.isLoading = false;
         this.notify('Update failed', MessageType.Error);
       }

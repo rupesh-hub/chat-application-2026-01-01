@@ -9,12 +9,12 @@
 
 2. Run Product Service Container
    ```shell
-    docker network create chat-apps-network --driver bridge && 
+    docker network create chat-apps --driver bridge && 
     docker run -d \
     -p 8181:8181 \
     --name chat-service-backend \
-    -e SPRING_PROFILES_ACTIVE=default \
-    --network chat-apps-network \
+    -e SPRING_PROFILES_ACTIVE=docker \
+    --network chat-apps \
     rupesh1997/chat-service-backend:1.0.0
     ```
 
@@ -32,7 +32,9 @@
     -e SPRING_PROFILES_ACTIVE=docker \
     -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/chats \
     -e SPRING_DATASOURCE_PASSWORD=root \
-    rupesh1997/chat-service-backend:1.0.1
+    -e MAIL_USERNAME=XXX \
+    -e MAIL_PASSWORD=XXX \
+    rupesh1997/chat-service-backend:latest
     ```
 
 

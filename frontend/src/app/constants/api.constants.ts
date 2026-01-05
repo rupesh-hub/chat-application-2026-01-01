@@ -1,6 +1,7 @@
+import {environment} from '../../environments/environment-default';
 
 export const API = {
-  WEBSOCKET_URL: "http://localhost:8181/ws",
+  WEBSOCKET_URL: environment.WEBSOCKET_URI,
   AUTH: {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',

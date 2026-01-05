@@ -2,7 +2,7 @@ name: frontend pipeline
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - 'frontend/**'
       - 'docker/frontend/Dockerfile'

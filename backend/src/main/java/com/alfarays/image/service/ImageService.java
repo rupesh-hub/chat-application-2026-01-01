@@ -33,6 +33,9 @@ public class ImageService {
     private static final String PUBLIC_UPLOAD_PATH = "/uploads/";
     private final ImageRepository imageRepository;
 
+    @Value("${server.port}")
+    private String PORT;
+
     @Value("${file.upload.directory}")
     private String uploadDir;
 
@@ -129,6 +132,7 @@ public class ImageService {
 
     private String generateFileUrl(Path filePath) {
         return ServletUriComponentsBuilder.fromCurrentContextPath()
+                .port(PORT) // 👈 This forces the generated string to use 8181
                 .path(PUBLIC_UPLOAD_PATH)
                 .path(filePath.getParent().getFileName().toString() + "/")
                 .path(filePath.getFileName().toString())

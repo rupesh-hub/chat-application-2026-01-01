@@ -2,6 +2,23 @@ spring:
   config:
     activate:
       on-profile: "production"
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+application:
+  email:
+    reset_password_url: ${RESET_PASSWORD_URL:http://192.168.1.70:4200/auth/reset-password}
 
 info:
   app:
