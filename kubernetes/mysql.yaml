@@ -1,15 +1,15 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: mysql-service
+  name: mysql
   namespace: chats
 spec:
   clusterIP: None
   selector:
     app: mysql
   ports:
-    - name: mysql
-      port: 3306
+    - port: 3306
+      name: mysql
       targetPort: 3306
       protocol: TCP
 ---
@@ -19,7 +19,7 @@ metadata:
   name: mysql
   namespace: chats
 spec:
-  serviceName: mysql-service
+  serviceName: mysql
   replicas: 1
   selector:
     matchLabels:
@@ -41,36 +41,16 @@ spec:
                   name: mysql-secret
                   key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config
-                  key: MYSQL_DATABASE
+              value: chats
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 500m
-              memory: 1Gi # 👈 Increased to prevent OOMKilled
-          livenessProbe:
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 10
-            periodSeconds: 10
   volumeClaimTemplates:
     - metadata:
         name: mysql-data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "local-storage"
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
