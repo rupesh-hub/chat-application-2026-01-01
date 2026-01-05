@@ -205,7 +205,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   mysql:
     container_name: mysql
     image: mysql:8.0
@@ -223,7 +222,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   backend-svc:
     container_name: backend-svc
     image: rupesh1997/chat-service-backend:1.0.1
