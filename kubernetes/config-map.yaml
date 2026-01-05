@@ -5,3 +5,5 @@ metadata:
   namespace: chat-apps
 data:
   MYSQL_DATABASE: "chats"
+  MAIL_USERNAME: "dulalrupesh77@gmail.com"
+  MAIL_PASSWORD: "ggclrebptyukhthz"

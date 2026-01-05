@@ -21,6 +21,18 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: production
+
+            - name: MAIL_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MAIL_USERNAME
+
+            - name: MAIL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MAIL_PASSWORD
 ---
 apiVersion: v1
 kind: Service

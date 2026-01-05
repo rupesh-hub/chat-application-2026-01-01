@@ -359,28 +359,7 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/frontend-pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/frontend-pipeline.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/service/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/image/service/ImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/backend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/backend/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/frontend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/frontend/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/constants/api.constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/forgot-password/forgot-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/auth/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/users/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-default.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-docker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-docker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment-production.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment-production.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/backend.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/backend.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -598,7 +577,7 @@
       <workItem from="1766847217283" duration="86996000" />
       <workItem from="1767248693557" duration="19038000" />
       <workItem from="1767353895701" duration="11292000" />
-      <workItem from="1767434317316" duration="24335000" />
+      <workItem from="1767434317316" duration="25727000" />
     </task>
     <servers />
   </component>

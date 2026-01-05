@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deploy
-  namespace: chats
+  namespace: chats # Unified namespace
 spec:
   replicas: 1
   selector:
@@ -17,17 +17,17 @@ spec:
         - name: chat-frontend
           image: rupesh1997/chat-service-frontend:1.0.1
           ports:
-            - containerPort: 8080
+            - containerPort: 8080 # 👈 The port inside the container
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-svc
-  namespace: chat-apps
+  namespace: chats # 👈 Must match the Deployment namespace
 spec:
   selector:
     app: chat-frontend
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 4200       # 👈 The port you use to call the service
+      targetPort: 8080 # 👈 Must match the containerPort above
