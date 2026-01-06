@@ -31,7 +31,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       MAIL_USERNAME: dulalrupesh77@gmail.com
-      MAIL_PASSWORD: ggclrebptyukhthz
+      MAIL_PASSWORD: XXX
     healthcheck:
       test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
       interval: 30s
