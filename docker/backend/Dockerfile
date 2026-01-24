@@ -18,6 +18,6 @@ EXPOSE 8181
 
 ENV APP_VERSION=${PROJECT_VERSION}
 ENV PROFILE=${ACTIVE_PROFILE}
-ENV DB_URL="jdbc:mysql://mysql:3306/chats"
+ENV DB_URL="jdbc:mysql://chats-mysql-svc:3306/chats"
 
 CMD java -jar -Dspring.profiles.active=${PROFILE} -Dspring.datasource.url=${DB_URL} chat-service-backend-${APP_VERSION}.jar

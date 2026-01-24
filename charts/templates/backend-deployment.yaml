@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Chart.Name }}-backend
+    version: {{ .Chart.AppVersion }}
+    component: api
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-backend
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-backend
+        version: {{ .Chart.AppVersion }}
+        component: api
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-backend
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      initContainers:
+        - name: wait-for-db
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              until nc -z {{ .Chart.Name }}-mysql-svc {{ .Values.mysql.service.port }}; do
+                echo "Waiting for database..."
+                sleep 2
+              done
+      containers:
+        - name: {{ .Chart.Name }}-backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.service.containerPort }}
+          env:
+            - name: APPLICATION_CORS_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  key: APPLICATION_CORS_ORIGINS
+                  name: {{ .Chart.Name }}-config
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_PROFILES_ACTIVE
+                  name: {{ .Chart.Name }}-config
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_URL
+                  name: {{ .Chart.Name }}-config
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_USERNAME
+                  name: {{ .Chart.Name }}-config
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_PASSWORD
+                  name: {{ .Chart.Name }}-secrets
+          {{- with .Values.backend.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

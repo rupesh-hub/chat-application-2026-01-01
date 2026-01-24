@@ -107,6 +107,14 @@
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/java/com/alfarays/JenkinsDemoProject01Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/resources/application.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/test/java/com/alfarays/JenkinsDemoProject01ApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/backend-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/backend-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/config-map.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/database-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/database-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/frontend-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/frontend-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/charts/templates/secrets.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer-stream/src/main/java/com/alfarays/StreamConsumer.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer/src/main/java/com/alfarays/KafkaConsumer.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer/src/main/java/com/alfarays/RiderLocation.java" afterDir="false" />
@@ -399,7 +407,8 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/backend-pipeline.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -619,7 +628,7 @@
       <workItem from="1767353895701" duration="11292000" />
       <workItem from="1767434317316" duration="31895000" />
       <workItem from="1767679849539" duration="189000" />
-      <workItem from="1769245686848" duration="9885000" />
+      <workItem from="1769245686848" duration="19588000" />
     </task>
     <servers />
   </component>

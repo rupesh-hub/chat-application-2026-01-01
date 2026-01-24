@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}-mysql
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Chart.Name }}-mysql
+    version: {{ .Chart.AppVersion }}
+    component: database
+
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-mysql
+  serviceName: {{ .Chart.Name }}-mysql-svc
+  replicas: {{ .Values.mysql.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-mysql
+        version: {{ .Chart.AppVersion }}
+        component: database
+    spec:
+      serviceAccountName: {{ .Chart.Name }}-mysql
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        fsGroup: 999
+
+      containers:
+        - name: {{ .Chart.Name }}-mysql
+          image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}"
+          imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
+          ports:
+            - name: {{ .Chart.Name }}-mysql
+              containerPort: {{ .Values.mysql.service.containerPort }}
+
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_PASSWORD
+                  name: {{ .Chart.Name }}-secrets
+
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_NAME
+                  name: {{ .Chart.Name }}-config
+
+          {{- with .Values.mysql.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.mysql.storage.size | default "10Gi" }}
+
