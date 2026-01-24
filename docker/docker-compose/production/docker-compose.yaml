@@ -20,7 +20,7 @@ services:
       service: network-configuration
   backend-svc:
     container_name: backend-svc
-    image: rupesh1997/chat-service-backend:latest
+    image: rupesh1997/chat-service-backend:1.0.0
     ports:
       - "8181:8181"
     depends_on:
