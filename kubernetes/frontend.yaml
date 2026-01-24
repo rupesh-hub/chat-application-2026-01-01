@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-frontend
-          image: rupesh1997/chat-service-frontend:1.0.1
+          image: rupesh1997/chat-service-frontend:1.0.0
           ports:
             - containerPort: 8080 # 👈 The port inside the container
 ---

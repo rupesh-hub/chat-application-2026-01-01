@@ -1,5 +1,4 @@
 services:
-
   mysql:
     container_name: mysql
     image: mysql:8.0
@@ -19,7 +18,6 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   backend-svc:
     container_name: backend-svc
     image: rupesh1997/chat-service-backend:latest
@@ -31,7 +29,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -39,10 +37,9 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
   chat-service-frontend:
     container_name: chat-service-frontend
-    image: rupesh1997/chat-service-frontend:latest
+    image: rupesh1997/chat-service-frontend:1.0.0
     depends_on:
       backend-svc:
         condition: service_started
@@ -51,10 +48,8 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
-
 networks:
   chat-apps:
     driver: 'bridge'
-
 volumes:
   mysql-data:
