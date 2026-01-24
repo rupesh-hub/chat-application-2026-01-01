@@ -16,7 +16,7 @@ concurrency:
 jobs:
   compile-test-build:
     name: Build & Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +33,7 @@ jobs:
 
   docker:
     name: Build & Push Docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [ compile-test-build ]
     outputs:
       VERSION: ${{ steps.extract_version.outputs.VERSION }}
@@ -72,7 +72,7 @@ jobs:
 
   update-deployments:
     name: Update Manifests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [ docker ]
     if: github.ref == 'refs/heads/main'
     permissions:
@@ -116,3 +116,31 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+
+  deployment:
+    name: Deploy backend
+    runs-on: self-hosted
+    needs: [ update-deployments ]
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create deployment folder
+        run: |
+          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p chat-application"
+
+      - name: Copy docker compose and common config files
+        run: |
+          scp docker/docker-compose/production/docker-compose.yaml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:chat-application/docker-compose.yaml
+          scp docker/docker-compose/production/common-config.yaml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:chat-application/common-config.yaml
+
+      - name: Setup environment variables
+        run: |
+          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          cd chat-application
+          docker-compose -f docker-compose.yaml down
+          docker-compose -f docker-compose.yaml pull -q
+          docker-compose -f docker-compose.yaml up -d
+          EOF
