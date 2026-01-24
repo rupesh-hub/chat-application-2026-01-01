@@ -1,5 +1,6 @@
 server:
   forward-headers-strategy: native
+
 spring:
   config:
     activate:
@@ -19,6 +20,7 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+
 application:
   email:
     reset_password_url: ${RESET_PASSWORD_URL:http://localhost:4200/auth/reset-password}
@@ -28,13 +30,5 @@ info:
     name: Chat Application Backend
     description: Handles one to one and group chats.
     version: 1.0.0
-    profile: docker
-    owner: Rupesh Dulal
-    website: https://www.alfarays.tech
-  build:
-    timestamp: "@timestamp@"
-  developer:
-    name: "Rupesh Dulal"
-    email: "rupeshdulal672@gmail.com"
-    github: "https://github.com/rupeshdulal"
+    profile: ${spring.profiles.active}
 

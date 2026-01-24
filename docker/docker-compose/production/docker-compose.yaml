@@ -1,244 +1,37 @@
 services:
-  read:
-    image: grafana/loki:3.1.2
-    command: "-config.file=/etc/loki/config.yaml -target=read"
-    ports:
-      - 3101:3100
-      - 7946
-      - 9095
-    volumes:
-      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
-    depends_on:
-      - minio
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks: &loki-dns
-      chat-apps:
-        aliases:
-          - loki
-  write:
-    image: grafana/loki:3.1.2
-    command: "-config.file=/etc/loki/config.yaml -target=write"
-    ports:
-      - 3102:3100
-      - 7946
-      - 9095
-    volumes:
-      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    depends_on:
-      - minio
-    networks:
-      !!merge <<: *loki-dns
-  alloy:
-    image: grafana/alloy:v1.5.1
-    volumes:
-      - ./observability/alloy/config.alloy:/etc/alloy/config.alloy:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
-    ports:
-      - 12345:12345
-    depends_on:
-      - gateway
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  minio:
-    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
-    entrypoint:
-      - sh
-      - -euc
-      - |
-        mkdir -p /data/loki-data && \
-        mkdir -p /data/loki-ruler && \
-        minio server /data
-    environment:
-      - MINIO_ROOT_USER=loki
-      - MINIO_ROOT_PASSWORD=supersecret
-      - MINIO_PROMETHEUS_AUTH_TYPE=public
-      - MINIO_UPDATE=off
-    ports:
-      - 9000
-    volumes:
-      - ./.data/minio:/data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 15s
-      timeout: 20s
-      retries: 5
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  prometheus:
-    image: prom/prometheus:v3.1.0
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./observability/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  tempo:
-    image: grafana/tempo:2.6.1
-    container_name: tempo
-    command: -config.file /etc/tempo-config.yml
-    ports:
-      - "3110:3100"
-      - "4318:4318"
-    volumes:
-      - ./observability/tempo/tempo.yaml:/etc/tempo-config.yml
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  grafana:
-    image: grafana/grafana:11.4.0
-    environment:
-      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-    depends_on:
-      - gateway
-    entrypoint:
-      - sh
-      - -euc
-      - |
-        /run.sh
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./observability/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  backend:
-    image: grafana/loki:3.1.2
-    volumes:
-      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
-    ports:
-      - "3100"
-      - "7946"
-    command: "-config.file=/etc/loki/config.yaml -target=backend -legacy-read-mode=false"
-    depends_on:
-      - gateway
-    extends:
-      file: common-config.yaml
-      service: network-configuration
-  gateway:
-    image: nginx:1.27.3
-    depends_on:
-      - read
-      - write
-    entrypoint:
-      - sh
-      - -euc
-      - |
-        cat <<EOF > /etc/nginx/nginx.conf
-        user  nginx;
-        worker_processes  5;  ## Default: 1
 
-        events {
-          worker_connections   1000;
-        }
-
-        http {
-          resolver 127.0.0.11;
-
-          server {
-            listen             3100;
-
-            location = / {
-              return 200 'OK';
-              auth_basic off;
-            }
-
-            location = /api/prom/push {
-              proxy_pass       http://write:3100\$$request_uri;
-            }
-
-            location = /api/prom/tail {
-              proxy_pass       http://read:3100\$$request_uri;
-              proxy_set_header Upgrade \$$http_upgrade;
-              proxy_set_header Connection "upgrade";
-            }
-
-            location ~ /api/prom/.* {
-              proxy_pass       http://read:3100\$$request_uri;
-            }
-
-            location = /loki/api/v1/push {
-              proxy_pass       http://write:3100\$$request_uri;
-            }
-
-            location = /loki/api/v1/tail {
-              proxy_pass       http://read:3100\$$request_uri;
-              proxy_set_header Upgrade \$$http_upgrade;
-              proxy_set_header Connection "upgrade";
-            }
-
-            location ~ /loki/api/.* {
-              proxy_pass       http://read:3100\$$request_uri;
-            }
-          }
-        }
-        EOF
-        /docker-entrypoint.sh nginx -g "daemon off;"
-    ports:
-      - "3100:3100"
-    healthcheck:
-      test: ["CMD", "service", "nginx", "status"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    extends:
-      file: common-config.yaml
-      service: network-configuration
   mysql:
     container_name: mysql
     image: mysql:8.0
+    restart: unless-stopped
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: chats
+    volumes:
+      - mysql-data:/var/lib/mysql
+    env_file:
+      - .env
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USERNAME -p$$MYSQL_PASSWORD"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 60s
+      start_period: 30s
     extends:
       file: common-config.yaml
       service: network-configuration
+
   backend-svc:
     container_name: backend-svc
-    image: rupesh1997/chat-service-backend:1.0.1
+    image: rupesh1997/chat-service-backend:latest
     ports:
       - "8181:8181"
     depends_on:
       mysql:
         condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: production
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chats
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      MAIL_USERNAME: dulalrupesh77@gmail.com
-      MAIL_PASSWORD: ggclrebptyukhthz
+    env_file:
+      - .env
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1"]
+      test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -246,9 +39,10 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
+
   chat-service-frontend:
     container_name: chat-service-frontend
-    image: rupesh1997/chat-service-frontend:1.0.1
+    image: rupesh1997/chat-service-frontend:latest
     depends_on:
       backend-svc:
         condition: service_started
@@ -257,6 +51,10 @@ services:
     extends:
       file: common-config.yaml
       service: network-configuration
+
 networks:
   chat-apps:
     driver: 'bridge'
+
+volumes:
+  mysql-data:

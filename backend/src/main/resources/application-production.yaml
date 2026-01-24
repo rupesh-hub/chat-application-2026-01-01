@@ -25,12 +25,5 @@ info:
     name: Chat Application Backend
     description: Handles one to one and group chats.
     version: 1.0.0
-    profile: production
+    profile: ${spring.profiles.active}
     owner: Rupesh Dulal
-    website: https://www.alfarays.tech
-  build:
-    timestamp: "@timestamp@"
-  developer:
-    name: "Rupesh Dulal"
-    email: "rupeshdulal672@gmail.com"
-    github: "https://github.com/rupeshdulal"

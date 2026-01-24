@@ -82,14 +82,14 @@ public class AuthenticationService implements IAuthenticationService {
 
             // 4. Save again to update the User with the Profile link
             userRepository.save(savedUser);
-
-            // 5. Publish registration event
-            eventPublisher.publishEvent(
-                    new UserRegistrationEvent(this,
-                            savedUser.getEmail(),
-                            name(savedUser.getFirstname(), savedUser.getLastname()))
-            );
         }
+
+        // 5. Publish registration event
+        eventPublisher.publishEvent(
+                new UserRegistrationEvent(this,
+                        savedUser.getEmail(),
+                        name(savedUser.getFirstname(), savedUser.getLastname()))
+        );
 
         return GlobalResponse.success(savedUser.getEmail());
     }

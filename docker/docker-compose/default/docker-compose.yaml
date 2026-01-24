@@ -1,37 +1,35 @@
 services:
+
   mysql:
     container_name: mysql
     image: mysql:8.0
+    restart: unless-stopped
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: chats
+    volumes:
+      - mysql-data:/var/lib/mysql
+    env_file:
+      - ../../../.env
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}" ]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 60s
+      start_period: 30s
     extends:
       file: common-config.yaml
       service: network-configuration
 
   backend-svc:
     container_name: backend-svc
-    image: rupesh1997/chat-service-backend:1.0.1
+    image: rupesh1997/chat-service-backend:latest
     ports:
       - "8181:8181"
     depends_on:
       mysql:
         condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chats
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      MAIL_USERNAME: dulalrupesh77@gmail.com
-      MAIL_PASSWORD: XXX
+    env_file:
+      - ../../../.env
     healthcheck:
       test: [ "CMD-SHELL", "wget -qO- http://localhost:8181/actuator/health || exit 1" ]
       interval: 30s
@@ -44,7 +42,7 @@ services:
 
   chat-service-frontend:
     container_name: chat-service-frontend
-    image: rupesh1997/chat-service-frontend:1.0.0
+    image: rupesh1997/chat-service-frontend:latest
     depends_on:
       backend-svc:
         condition: service_started
@@ -57,3 +55,6 @@ services:
 networks:
   chat-apps:
     driver: 'bridge'
+
+volumes:
+  mysql-data:

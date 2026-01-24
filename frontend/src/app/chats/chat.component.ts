@@ -69,7 +69,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   protected selectedConversationId$!: Observable<number | null>;
   protected messages$ = this.messageService.messages$;
   protected unreadCounts$ = this.websocketService.unreadCounts$;
-  protected authenticatedUser$ = this.authService.authenticatedUser$;
 
   // This stream makes the Header and Sidebar status LIVE
   protected activeConversation$!: Observable<ConversationResponse | null>;
@@ -98,7 +97,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       })
     );
 
-    this.selectedConversationId$.pipe(takeUntil(this.destroy$)).subscribe((id) => {
+    this.selectedConversationId$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((id) => {
       this.selectedConversationId = id;
       this.messageService.setActiveConversation(id);
       if (id) {

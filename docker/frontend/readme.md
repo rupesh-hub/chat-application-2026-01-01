@@ -16,18 +16,6 @@
    ```
 
    ```shell
-      #network - check if it is already created
-      docker network inspect chat-apps >/dev/null 2>&1 \
-      || docker network create chat-apps --driver bridge
-   
-      #mysql container
-      docker run -d -p 3306:3306 \
-       --name mysql -e MYSQL_ROOT_PASSWORD=root \
-       -e MYSQL_DATABASE=chats \
-       --network chat-apps mysql:8.0
-   ```
-
-   ```shell
    docker kill chat-service-frontend backend-svc mysql && docker system prune -f && clear && docker ps
    docker network connect chat-apps mysql
    ```

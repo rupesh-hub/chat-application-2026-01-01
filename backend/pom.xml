@@ -13,7 +13,7 @@
 
     <groupId>com.alfarays</groupId>
     <artifactId>chat-service-backend</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <name>chat-service-backend</name>
     <description>Professional one-to-one chat system</description>
 

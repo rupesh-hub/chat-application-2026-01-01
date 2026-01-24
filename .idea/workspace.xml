@@ -86,6 +86,18 @@
       <change afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/OAUTH-DEMO/resource-server-application/src/main/java/com/alfarays/service/ProductService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/OAUTH-DEMO/resource-server-application/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/OAUTH-DEMO/resource-server-application/src/main/resources/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/auth/auth.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/carts/carts.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/constants/api-constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/constants/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/layouts/main.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/orders/orders-routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/products/products.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/app/users/users.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/environments/environment-default.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/environments/environment-docker.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../EVENT-CHAIN-MARKETPLACE/frontend/src/environments/environment-production.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/.gitattributes" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/deployment/docker/Dockerfile" afterDir="false" />
@@ -95,6 +107,30 @@
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/java/com/alfarays/JenkinsDemoProject01Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/main/resources/application.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../JENKINS-MASTER/JENKINS-DEMO-PROJECT-01/src/test/java/com/alfarays/JenkinsDemoProject01ApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer-stream/src/main/java/com/alfarays/StreamConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer/src/main/java/com/alfarays/KafkaConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/consumer/src/main/java/com/alfarays/RiderLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/producer-stream/src/main/java/com/alfarays/StreamProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/producer/src/main/java/com/alfarays/Functions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/producer/src/main/java/com/alfarays/KafkaProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/producer/src/main/java/com/alfarays/KafkaTopicConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/producer/src/main/java/com/alfarays/RiderLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../MESSAGING-APP/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/feignclients/ProviderClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/httpinterface/HttpInterfaceConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/httpinterface/ProviderHttpInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/model/MessageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/resource/ConsumerResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/restclient/ProviderRestClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/restclient/RestClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/resttemplate/RestTemplateClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/resttemplate/RestTemplateConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/webclient/ProviderWebClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/consumer/src/main/java/com/alfarays/webclient/WebClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/producer/src/main/java/com/alfarays/message/model/MessageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../SERVICE-COMMUNICATION/producer/src/main/java/com/alfarays/message/resource/MessageResource.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM-PRACTICE/TERRAFORM-DAY-01/terraform.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/main.tf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../TERRAFORM/TERRAFORM-IN-ONE-SHOT/provider.tf" afterDir="false" />
@@ -157,6 +193,12 @@
       <change afterPath="$PROJECT_DIR$/../../task-management-system/src/main/resources/templates/login.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../task-management-system/src/main/resources/templates/register.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../task-management-system/src/main/resources/templates/task-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/DSA-FULL-COIRSE/src/main/java/com/alfarays/linkedlist/SinglyLinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/DSA-FULL-COIRSE/src/main/java/com/alfarays/node/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/DSA-PATTERN/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/DSA-PATTERN/Pattern.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/JAVA-CHEAT-SHEET.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../DSA-2026-01-12/readme.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../SHOPPING HUB/backend/authorization-server/src/main/java/com/alfarays/configurations/ApplicationConfiguration.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../SHOPPING HUB/backend/authorization-server/src/main/java/com/alfarays/configurations/CustomSecurityConfiguration.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../SHOPPING HUB/backend/authorization-server/src/main/java/com/alfarays/controller/HomeController.java" afterDir="false" />
@@ -359,6 +401,18 @@
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/java/com/alfarays/resource/WelcomeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../DEVOPS-PRACTICES/DEV-SEC-OPS-DEMO/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-docker.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-production.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/backend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/backend/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/default/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose/extra/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/extra/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose/production/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/frontend/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/frontend/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chats/chat.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/config-map.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/config-map.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DEVOPS/DAY-01/backend/src/main/resources/application-dev.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../DSA/com.alsarays.app/MASTERCLASS/twodarray/TwoDArray.java" beforeDir="false" />
@@ -521,29 +575,29 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.chat-service-backend [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.chat-service-backend [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.BackendApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "/Users/rupeshdulal/Desktop/DEVOPS-FULL-COURSE/KUBERNETES-HANDSON/CHAT-APPLICATION/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docker/docker-compose/production" />
@@ -578,6 +632,7 @@
       <workItem from="1767353895701" duration="11292000" />
       <workItem from="1767434317316" duration="31895000" />
       <workItem from="1767679849539" duration="189000" />
+      <workItem from="1769245686848" duration="6492000" />
     </task>
     <servers />
   </component>
@@ -617,6 +672,16 @@
           <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/user/resource/UserResource.java</url>
           <line>101</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/events/UserRegistrationEventListener.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/alfarays/authentication/service/AuthenticationService.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
