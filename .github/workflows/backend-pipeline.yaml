@@ -140,7 +140,7 @@ jobs:
         run: |
           ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           cd chat-application
-          docker-compose -f docker-compose.yaml down
-          docker-compose -f docker-compose.yaml pull -q
-          docker-compose -f docker-compose.yaml up -d
+          docker compose -f docker-compose.yaml down
+          docker compose -f docker-compose.yaml pull -q
+          docker compose -f docker-compose.yaml up -d
           EOF
